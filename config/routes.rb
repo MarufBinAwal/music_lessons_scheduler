@@ -4,9 +4,8 @@ Rails.application.routes.draw do
 
   resources :students
   resources :lessons
-  resources :instructors do
-    resources :availability, only: [:index]
-  end
+  resources :instructors
+  resources :availabilities
 
   
 end

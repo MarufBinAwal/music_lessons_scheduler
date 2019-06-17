@@ -4,11 +4,11 @@ class InstructorsController < ApplicationController
     end
 
     def new
-        @start_times = ["1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"]
-        @end_times = ["1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM"]
+        
     end
     
     def create
+        byebug
         instructor = Instructor.create(allowed_params)
         redirect_to instructor_path(instructor)
     end
@@ -27,14 +27,18 @@ class InstructorsController < ApplicationController
         @availabilities = Availability.all.select do | each_a |
             each_a.instructor == @instructor
         end
-        @start_times = ["1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"]
-        @end_times = ["1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM"]
     end
 
     def update
         instructor = Instructor.find(params[:id])
         instructor.update(allowed_params)
         redirect_to instructor_path(instructor)
+    end
+
+    def destroy
+        instructor = Instructor.find(params[:id])
+        instructor.destroy
+        redirect_to instructors_path
     end
 
     private

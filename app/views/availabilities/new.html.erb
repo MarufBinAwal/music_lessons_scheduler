@@ -1,0 +1,27 @@
+<h1>New Availability</h1>
+<%= form_with model: Availability.new do |f| %>
+
+    <div>
+        <%= f.label :time %>
+        <select name="availability[start_time]">
+            <% @start_times.count.times do |num| %>
+                <%= content_tag(:option, "#{@start_times[num]} to #{@end_times[num]}", value: @start_times[num]) %>
+            <% end %>
+        </select>
+    </div>
+
+
+     <div>
+        <%= f.label :day %>
+        <%= f.text_field :day %>
+    </div>
+    <div>
+        <%= f.label :instructor %>    
+        <%= collection_select :availability, :instructor_id, Instructor.all, :id, :full_name %>
+        
+    </div>
+
+
+    <%= f.submit %>
+
+<% end %>
