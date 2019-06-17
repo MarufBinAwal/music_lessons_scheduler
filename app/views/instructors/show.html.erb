@@ -1,0 +1,11 @@
+<%= content_tag(:h1, @instructor.full_name) %>
+<%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
+<%= content_tag(:p, "Phone Number: #{@instructor.phone_number}")%>
+<%= content_tag(:p, "Email: #{@instructor.email}")%>
+<%= content_tag(:p, "Instruments: #{@instructor.misc_notes}")%>
+<%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
+<%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
+<%= content_tag(:p, "Status #{@instructor.active}") %>
+<%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
+<%= link_to("Return to Index", instructors_path) %>
+
