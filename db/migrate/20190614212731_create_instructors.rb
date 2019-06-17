@@ -9,8 +9,7 @@ class CreateInstructors < ActiveRecord::Migration[5.2]
       t.string :instruments
       t.string :pay_rate
       t.text :misc_notes
-      t.text :availability
-      t.string :status
+      t.boolean :active
       
       t.timestamps
     end

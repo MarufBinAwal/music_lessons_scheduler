@@ -1,0 +1,42 @@
+<%= content_tag(:h1, "Edit #{@student.full_name}")%>
+<%= form_with model: @student do | f | %>
+    <div>
+        <%= f.label :first_name%>
+        <%= f.text_field :first_name%>
+    </div>
+
+    <div>
+        <%= f.label :last_name%>
+        <%= f.text_field :last_name%>
+    </div>
+
+     <div>
+        <%= f.label :date_of_birth%>
+        <%= f.text_field :date_of_birth%>
+    </div>
+
+     <div>
+        <%= f.label :phone_number%>
+        <%= f.text_field :phone_number%>
+    </div>
+
+     <div>
+        <%= f.label :email%>
+        <%= f.text_field :email%>
+    </div>
+
+     <div>
+        <%= f.label :notes%>
+        <%= f.text_area :misc_notes%>
+    </div>
+
+     <div>
+        <%= f.label :billing_information%>
+        <%= f.text_area :billing_notes%>
+    </div>
+
+    <%= f.submit %>
+
+<% end %>
+
+<%= link_to "Delete", @student, method: :delete, data: { confirm: "Are you sure you want to delete this student?" } %>

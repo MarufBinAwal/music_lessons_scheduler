@@ -1,0 +1,8 @@
+<h1>Students</h1>
+<%= link_to("Create new student", new_student_path) %>
+
+<ul>
+    <% @students.each do |student| %>
+        <li><%= link_to "#{student.full_name}", student_path(student)%><%=": #{student.phone_number}, #{student.email}"%></li>
+    <% end %>
+</ul>
