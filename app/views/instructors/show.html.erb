@@ -5,7 +5,13 @@
 <%= content_tag(:p, "Instruments: #{@instructor.misc_notes}")%>
 <%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
 <%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
-<%= content_tag(:p, "Status #{@instructor.active}") %>
+<%= content_tag(:p, "Status: #{@status}") %>
+<ul>
+    <p>Lessons</p>
+    <% @instructor.lessons.each do |each_l| %>
+        <li><%= "#{each_l.day}: #{each_l.start_time} to #{each_l.end_time}"%></li>
+    <% end %>
+</ul>
 <%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
 <%= link_to("Return to Index", instructors_path) %>
 

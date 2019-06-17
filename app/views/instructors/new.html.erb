@@ -1,0 +1,49 @@
+<%= form_with model: Instructor.new do | f | %>
+    <div>
+        <%= f.label :first_name%>
+        <%= f.text_field :first_name%>
+    </div>
+
+    <div>
+        <%= f.label :last_name%>
+        <%= f.text_field :last_name%>
+    </div>
+
+     <div>
+        <%= f.label :date_of_birth%>
+        <%= f.text_field :date_of_birth%>
+    </div>
+
+     <div>
+        <%= f.label :phone_number%>
+        <%= f.text_field :phone_number%>
+    </div>
+
+     <div>
+        <%= f.label :email%>
+        <%= f.text_field :email%>
+    </div>
+
+     <div>
+        <%= f.label :instruments %>
+        <%= f.text_area :instruments %>
+    </div>
+
+     <div>
+        <%= f.label :pay_rate %>
+        <%= f.text_area :pay_rate %>
+    </div>
+
+    <div>
+        <%= f.label :misc_notes %>
+        <%= f.text_area :misc_notes %>
+    </div>
+
+    <div>
+        <%= f.label :status %>
+        <%= f.select :active, [ ['Active', true], ['Inactive', false] ] %>
+    </div>
+
+    <%= f.submit %>
+
+<% end %>

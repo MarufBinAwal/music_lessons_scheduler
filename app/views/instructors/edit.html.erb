@@ -41,12 +41,17 @@
     </div>
 
     <div>
-        <%= f.label :active %>
-        <%= f.text_area :status %>
+        <%= f.label :status %>
+        <%= f.select :active, [ ['Active', true], ['Inactive', false] ] %>
     </div>
+
+
+    
+
     <%= f.submit %>
 
 <% end %>
 
 <%= link_to "Delete", @instructor, method: :delete, data: { confirm: "Are you sure you want to delete this instructor?" } %>
 <%= link_to "Back", instructor_path(@instructor) %>
+

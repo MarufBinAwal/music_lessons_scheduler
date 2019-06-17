@@ -3,8 +3,8 @@ class CreateLessons < ActiveRecord::Migration[5.2]
     create_table :lessons do |t|
       t.integer :instructor_id
       t.string :day
-      t.time :start_time
-      t.time :end_time
+      t.string :start_time
+      t.string :end_time
       t.string :instrument
       t.text :misc_notes
       t.integer :price_of_lesson

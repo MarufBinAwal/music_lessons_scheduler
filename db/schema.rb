@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2019_06_17_171018) do
 
   create_table "availabilities", force: :cascade do |t|
-    t.time "start_time"
-    t.time "end_time"
+    t.string "start_time"
+    t.string "end_time"
     t.string "day"
     t.integer "instructor_id"
     t.datetime "created_at", null: false
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 2019_06_17_171018) do
   create_table "lessons", force: :cascade do |t|
     t.integer "instructor_id"
     t.string "day"
-    t.time "start_time"
-    t.time "end_time"
+    t.string "start_time"
+    t.string "end_time"
     t.string "instrument"
     t.text "misc_notes"
     t.integer "price_of_lesson"

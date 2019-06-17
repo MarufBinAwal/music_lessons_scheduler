@@ -7,3 +7,8 @@
 <%= link_to("Edit this student", edit_student_path(@student)) %><br>
 <%= link_to("Return to Index", students_path) %>
 
+<ul>
+    <% @student.lessons.each do |lesson| %>
+        <li><%= "#{lesson.day} #{lesson.start_time} to #{lesson.end_time}" %></li>
+    <% end %>
+</ul>
