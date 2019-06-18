@@ -12,3 +12,14 @@
         <li><%= "#{lesson.day} #{lesson.start_time} to #{lesson.end_time}" %></li>
     <% end %>
 </ul>
+<ul>
+    <% @student.lessons.select do | lesson | %>
+        <%= lesson.instrument %>
+        <%= lesson.start_time %>
+        <%= lesson.end_time %>
+        <%= lesson.price_of_lesson %>
+        <%= lesson.misc_notes %>
+        <%= lesson.user %>
+        <%= lesson.active %>
+</ul>
+<% end %>
