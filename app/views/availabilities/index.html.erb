@@ -1,5 +1,6 @@
 <h1>Availability Index</h1>
 <ul>
-<% @instructors.each do |instructor| %>
-    <li><%= link_to instructor.full_name, availability_path(instructor.id) %></li>
-<% end %>
+    <% @instructors.each do |instructor| %>
+        <li><%= link_to instructor.full_name, availability_path(instructor.id) %></li>
+    <% end %>
+</ul>

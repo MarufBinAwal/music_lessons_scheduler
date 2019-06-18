@@ -6,6 +6,7 @@
 <%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
 <%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
 <%= content_tag(:p, "Status: #{@status}") %>
+<%= link_to("Work Hours", availability_path(@instructor.id)) %>
 <ul>
     <p>Lessons</p>
     <% @instructor.lessons.each do |each_l| %>

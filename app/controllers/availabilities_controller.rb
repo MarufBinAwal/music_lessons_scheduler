@@ -7,8 +7,31 @@ class AvailabilitiesController < ApplicationController
 
     def show
         @instructor = Instructor.find(params[:id])
-        @availabilities = Availability.all.select do | each_a |
+        unsorted_availabilities = Availability.all.select do | each_a |
             each_a.instructor == @instructor
+        end
+
+        time_sort_availabilities = unsorted_availabilities.sort_by do |availability|
+            availability.start_time
+        end
+
+        @availabilities = time_sort_availabilities.sort_by do |availability|
+            case availability.day
+            when "Monday"
+                1
+            when "Tuesday"
+                2
+            when "Wednesday"
+                3
+            when "Thursday"
+                4
+            when "Friday"
+                5
+            when "Saturday"
+                6
+            when "Sunday"
+                7
+            end
         end
     end
 
@@ -31,7 +54,6 @@ class AvailabilitiesController < ApplicationController
         params.require(:availability).permit(
             :instructor_id,
             :start_time,
-            :end_time,
             :day
         )
     end
