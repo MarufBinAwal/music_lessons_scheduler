@@ -7,6 +7,6 @@ Rails.application.routes.draw do
   resources :instructors do
     get '/availabilities', to: 'availabilities#index'
   end
-  resources :availabilities
+  resources :availabilities, only: [:show,:edit,:update,:new,:create, :destroy]
   
 end
