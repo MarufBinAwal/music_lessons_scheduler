@@ -1,4 +1,7 @@
 class InstructorsController < ApplicationController
+    
+
+    
     def index
         @instructors = Instructor.all
     end
@@ -40,18 +43,37 @@ class InstructorsController < ApplicationController
         redirect_to instructors_path
     end
 
-    private
     def allowed_params
         params.required(:instructor).permit(
             :first_name,
             :last_name,
             :date_of_birth,
             :phone_number,
+            :password,
             :email,
             :instruments,
             :pay_rate,
             :misc_notes,
             :active
         )
+    end
+
+    def login_form
+        
+    end
+
+    def authenticate
+        instructor = Instructor.find_by(email:(params[:email]))
+        if instructor != nil && instructor.authenticate(params[:password])
+            session[:instructor_id] = instructor.id
+            redirect_to instructor_path(session[:instructor_id])
+        else
+            #error
+        end
+    end
+
+    def log_out
+        session[:instructor_id] = nil
+        redirect_to '/'
     end
 end

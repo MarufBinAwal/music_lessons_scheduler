@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
   get 'sessions/new'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
+ 
   resources :students
   resources :lessons
   resources :instructors
   resources :availabilities
+
+  get '/', to: "instructors#login_form"
+
+  post 'instructors/authenticate', to: "instructors#authenticate"
+
+  get '/logout', to: "instructors#log_out"
   
 end

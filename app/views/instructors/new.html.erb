@@ -23,6 +23,10 @@
         <%= f.label :email%>
         <%= f.text_field :email%>
     </div>
+    <div>
+        <%= f.label :password%>
+        <%= f.text_field :password%>
+    </div>
 
      <div>
         <%= f.label :instruments %>
@@ -44,11 +48,7 @@
         <%= f.select :active, [ ['Active', true], ['Inactive', false] ] %>
     </div>
 
-    <div>
-
-        <%= f.label :start_times %>
-        <%= f.text_field :start_times %>
-    </div>
+   
 
     <%= f.submit %>
 

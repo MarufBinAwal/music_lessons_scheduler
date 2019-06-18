@@ -15,7 +15,7 @@ end
     instruments = ["Piano", "Guitar", "Drums", "Voice", "Saxophone", "Violin", "Flute"]
 
     first_name = Faker::Name.first_name
-    Instructor.create(first_name: first_name, last_name: Faker::Name.last_name, date_of_birth: Faker::Date.birthday(22,60), phone_number: phone_number, email: "#{first_name}@gmail.com", instruments: instruments.sample, pay_rate: "$30/hour", biography: Faker::Quote.matz, active: true )
+    Instructor.create(first_name: first_name, last_name: Faker::Name.last_name, date_of_birth: Faker::Date.birthday(22,60), phone_number: phone_number, email: "#{first_name}@gmail.com", instruments: instruments.sample, pay_rate: "$30/hour", biography: Faker::Quote.matz, active: true, password: "5678" )
 end
 
 Instructor.all.each do |instructor|

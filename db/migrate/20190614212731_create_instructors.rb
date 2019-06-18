@@ -8,6 +8,7 @@ class CreateInstructors < ActiveRecord::Migration[5.2]
       t.string :email
       t.string :instruments
       t.string :pay_rate
+      t.text :password_digest
       t.text :biography
       t.text :misc_notes
       t.boolean :active
