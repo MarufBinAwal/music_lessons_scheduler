@@ -27,6 +27,13 @@ class AvailabilitiesController < ApplicationController
         redirect_to availability_path(allowed_params[:instructor_id])
     end
 
+    def destroy
+        availability = Availability.find(params[:id])
+        instructor = availability.instructor
+        availability.destroy
+        redirect_to instructor_availabilities_path(instructor)
+    end
+
     private
     def allowed_params
         params.require(:availability).permit(

@@ -15,6 +15,7 @@
         <%= f.label :day %>
         <%= f.text_field :day %>
     </div>
+    
     <div>
         <%= f.label :instructor %>    
         <%= collection_select :availability, :instructor_id, Instructor.all, :id, :full_name %>
