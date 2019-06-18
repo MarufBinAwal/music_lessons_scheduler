@@ -1,18 +1,16 @@
 class AvailabilitiesController < ApplicationController
     
     def index
-        @instructors = Instructor.all
-        
-    end
-
-    def show
-        @instructor = Instructor.find(params[:id])
+        @instructor = Instructor.find(params[:instructor_id])
         unsorted_availabilities = Availability.all.select do | each_a |
             each_a.instructor == @instructor
         end
 
         @availabilities = sorted_availabilities(unsorted_availabilities)
+    end
 
+    def show
+        @availability = Availability.find(params[:id])
     end
 
     def new
@@ -27,6 +25,13 @@ class AvailabilitiesController < ApplicationController
         availability = Availability.create(allowed_params)
         availability.update(end_time: end_time)
         redirect_to availability_path(allowed_params[:instructor_id])
+    end
+
+    def destroy
+        availability = Availability.find(params[:id])
+        instructor = availability.instructor
+        availability.destroy
+        redirect_to instructor_availabilities_path(instructor)
     end
 
     private

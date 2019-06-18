@@ -2,11 +2,11 @@
 <%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
 <%= content_tag(:p, "Phone Number: #{@instructor.phone_number}")%>
 <%= content_tag(:p, "Email: #{@instructor.email}")%>
-<%= content_tag(:p, "Instruments: #{@instructor.misc_notes}")%>
+<%= content_tag(:p, "Instruments: #{@instructor.instruments}")%>
 <%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
 <%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
 <%= content_tag(:p, "Status: #{@status}") %>
-<%= link_to("Work Hours", availability_path(@instructor.id)) %>
+<%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
 <ul>
     <p>Lessons</p>
     <% @instructor.availabilities.each do |availability| %>
