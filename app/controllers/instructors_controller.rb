@@ -8,7 +8,6 @@ class InstructorsController < ApplicationController
     end
     
     def create
-        byebug
         instructor = Instructor.create(allowed_params)
         redirect_to instructor_path(instructor)
     end

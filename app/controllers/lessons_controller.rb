@@ -11,10 +11,8 @@ class LessonsController < ApplicationController
 
     private def lesson_params 
         params.require(:lesson).permit(
-            :instructor_id,
-            :day, 
-            :start_time,
-            :end_time, 
+            :availability_id,
+            :student_id,
             :instrument,
             :misc_notes,
             :price_of_lesson,

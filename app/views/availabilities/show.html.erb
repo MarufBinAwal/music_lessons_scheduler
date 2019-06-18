@@ -1,7 +1,10 @@
 <%= content_tag(:h1, @instructor.full_name) %>
 
-<ul>
-    <% @availabilities.each do |availability| %>
-        <li><%= "#{availability.day} #{availability.start_time}-#{availability.end_time}" %></li>
-    <% end %>
-</ul>
+<% @instructor.availabilities.each do |availability| %>
+    <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
+    <ul>
+        <% availability.lessons.each do |lesson|%>
+            <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
+        <% end %>
+    </ul>
+<% end %>

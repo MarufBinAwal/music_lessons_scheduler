@@ -9,8 +9,15 @@
 <%= link_to("Work Hours", availability_path(@instructor.id)) %>
 <ul>
     <p>Lessons</p>
-    <% @instructor.lessons.each do |each_l| %>
-        <li><%= "#{each_l.day}: #{each_l.start_time} to #{each_l.end_time}"%></li>
+    <% @instructor.availabilities.each do |availability| %>
+        <% if availability.lessons.count != 0 %>
+            <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
+            <ul>
+                <% availability.lessons.each do |lesson|%>
+                    <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
+                <% end %>
+            </ul>
+        <% end %>
     <% end %>
 </ul>
 <%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>

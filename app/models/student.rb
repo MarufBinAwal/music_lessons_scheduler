@@ -1,7 +1,7 @@
 class Student < ApplicationRecord
-    has_many :lessonstudents, dependent: :destroy
-    has_many :lessons, through: :lessonstudents, dependent: :destroy
-    has_many :instructors, through: :lessons
+    has_many :lessons, dependent: :destroy
+    has_many :availabilities, through: :lessons
+    has_many :instructors, through: :availabilities
 
     def full_name
         "#{self.first_name} #{self.last_name}"

@@ -11,28 +11,8 @@ class AvailabilitiesController < ApplicationController
             each_a.instructor == @instructor
         end
 
-        time_sort_availabilities = unsorted_availabilities.sort_by do |availability|
-            availability.start_time
-        end
+        @availabilities = sorted_availabilities(unsorted_availabilities)
 
-        @availabilities = time_sort_availabilities.sort_by do |availability|
-            case availability.day
-            when "Monday"
-                1
-            when "Tuesday"
-                2
-            when "Wednesday"
-                3
-            when "Thursday"
-                4
-            when "Friday"
-                5
-            when "Saturday"
-                6
-            when "Sunday"
-                7
-            end
-        end
     end
 
     def new
@@ -56,6 +36,28 @@ class AvailabilitiesController < ApplicationController
             :start_time,
             :day
         )
+    end
+
+    def sorted_availabilities(unsorted_availabilities)
+
+        time_sort_availabilities = unsorted_availabilities.sort_by do |availability|
+            availability.start_time
+        end
+
+        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        availabilities = {}
+
+        days.each do |desired_day|
+            availabilities[desired_day] = []
+            daily_avail = time_sort_availabilities.select  do |availability|
+                availability.day == desired_day
+            end
+            daily_avail.each do |availability|
+                availabilities[desired_day] << "#{availability.start_time}-#{availability.end_time}"
+            end
+        end
+
+        availabilities
     end
 
 end
