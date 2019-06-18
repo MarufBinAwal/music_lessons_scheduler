@@ -1,6 +1,10 @@
-<h1>Availability Index</h1>
-<ul>
-    <% @instructors.each do |instructor| %>
-        <li><%= link_to instructor.full_name, availability_path(instructor.id) %></li>
-    <% end %>
-</ul>
+<%= content_tag(:h1, "#{@instructor.full_name} Schedule") %>
+
+<% @instructor.availabilities.each do |availability| %>
+    <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%> <%= link_to "Show Page", availability_path(availability)%></li>
+    <ul>
+        <% availability.lessons.each do |lesson|%>
+            <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
+        <% end %>
+    </ul>
+<% end %>

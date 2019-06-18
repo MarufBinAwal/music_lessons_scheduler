@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   resources :students
   resources :lessons
-  resources :instructors
+  resources :instructors do
+    get '/availabilities', to: 'availabilities#index'
+  end
   resources :availabilities
   
 end
