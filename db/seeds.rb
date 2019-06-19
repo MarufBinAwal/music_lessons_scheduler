@@ -6,7 +6,7 @@
     phone_number = "(#{Faker::PhoneNumber.area_code}) #{Faker::PhoneNumber.exchange_code}-#{Faker::PhoneNumber.subscriber_number}"
 
     first_name = Faker::Name.first_name
-    Student.create(first_name: first_name, last_name: Faker::Name.last_name, date_of_birth: Faker::Date.birthday(12,60), phone_number: phone_number, email: "#{first_name}@gmail.com" )
+    Student.create(first_name: first_name, last_name: Faker::Name.last_name, date_of_birth: Faker::Date.birthday(12,60), phone_number: phone_number, email: "#{first_name}@gmail.com", password: "5678" )
 end
 
 10.times do |num|

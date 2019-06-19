@@ -1,7 +1,6 @@
 class InstructorsController < ApplicationController
     
 
-    
     def index
         @instructors = Instructor.all
     end
@@ -59,24 +58,30 @@ class InstructorsController < ApplicationController
         )
     end
 
-    def login_form
-        
-    end
+    # def login_form  
 
-    def authenticate
-        instructor = Instructor.find_by(email:(params[:email]))
-        if instructor != nil && instructor.authenticate(params[:password])
-            session[:instructor_id] = instructor.id
-            redirect_to instructor_path(session[:instructor_id])
-        else
-            #error
-        end
-    end
+    #     if (flash[:alert])
+    #         @errors = flash[:alert]
+    #     else
+    #         @errors = ""
+    #     end
+    # end
 
-    def log_out
-        session[:instructor_id] = nil
-        redirect_to '/'
-    end
+    # def authenticate
+    #     instructor = Instructor.find_by(email:(params[:email]))
+    #     if instructor != nil && instructor.authenticate(params[:password])
+    #         session[:instructor_id] = instructor.id
+    #         redirect_to instructor_path(session[:instructor_id])
+    #     else
+    #         flash[:alert] = "Email or password is invalid"
+    #     end
+    # end
+
+
+    # def log_out
+    #     session[:instructor_id] = nil
+    #     redirect_to '/'
+    # end
     
     def starting_availabilities(instructor)
         days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
@@ -88,4 +93,6 @@ class InstructorsController < ApplicationController
             end
         end
     end
+
+
 end
