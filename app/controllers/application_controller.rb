@@ -23,6 +23,7 @@ def authenticate
             redirect_to instructor_path(session[:instructor_id])
         else
             flash[:alert] = "Email or password is invalid"
+            redirect_to '/'
         end
     elsif value == "student"
         student = Student.find_by(email:(params[:email]))
@@ -31,6 +32,7 @@ def authenticate
             redirect_to student_path(session[:student_id])
         else
             flash[:alert] = "Email or password is invalid"
+            redirect_to '/'
         end
     elsif value == "admin"
         admin = Admin.find_by(email:(params[:email]))
@@ -39,6 +41,7 @@ def authenticate
             redirect_to lessons_path
         else
             flash[:alert] = "Email or password is invalid"
+            redirect_to '/'
         end
     end
 end
