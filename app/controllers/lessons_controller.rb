@@ -25,6 +25,18 @@ class LessonsController < ApplicationController
         @lesson = Lesson.find(params[:id])
     end 
 
+    def edit
+        @lesson = Lesson.find(params[:id])
+        @availabilities = Availability.all
+        @students = Student.all
+    end
+
+    def update
+        lesson = Lesson.find(params[:id])
+        lesson.updated(allowed_params)
+        redirect_to student_path(lesson.student)
+    end
+
 
     private def lesson_params 
         params.require(:lesson).permit(

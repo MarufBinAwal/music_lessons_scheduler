@@ -1,0 +1,39 @@
+<h1>Edit a Lesson</h1>
+<%= form_with model: @lesson do | f | %>
+    
+    <div>
+        Time and Instructor    
+        <%= collection_select :lesson, :availability_id, @availabilities, :id, :availability_details %>
+    </div>
+
+    <div>
+        <%= f.label :student%>    
+        <%= collection_select :lesson, :student_id, @students, :id, :full_name %>
+    </div>
+
+    <div>
+        <%= f.label :instrument %>
+        <%= f.text_field :instrument, required: true %>
+    </div>
+
+    <div>
+        <%= f.label :monthly_rate %>
+        <%= f.number_field :price_of_lesson, required: true %>
+    </div>
+
+    <div>
+        <%= f.label :misc_notes %>
+        <%= f.text_area :misc_notes %>
+    </div>
+
+    <div>
+        <%= f.label :status %>
+        <%= f.select :active, [ ['Active', true], ['Inactive', false] ] %>
+        <% if @lesson.active %>
+            <%= "('Inactive' will archive the lesson)" %>
+        <% end %>
+    </div>
+
+    <%= f.submit %>
+
+<% end %>
