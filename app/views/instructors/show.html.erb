@@ -9,17 +9,15 @@
 <%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
 <ul>
     <% @instructor.availabilities.each do |availability| %>
-        <% if availability.active %>
-            <% if availability.lessons.count != 0 %>
-                <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
-                <ul>
-                    <% availability.lessons.each do |lesson|%>
-                        <% if lesson.active %>
-                            <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
-                        <% end %>
+        <% if availability.active && availability.lessons.count != 0 %>
+            <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
+            <ul>
+                <% availability.lessons.each do |lesson|%>
+                    <% if lesson.active %>
+                        <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
                     <% end %>
-                </ul>
-            <% end %>
+                <% end %>
+            </ul>
         <% end %>
     <% end %>
 </ul>

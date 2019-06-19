@@ -40,8 +40,10 @@
     </div>
 
     <div>
-        <%= f.label :status %>
-        <%= f.select :active, [ ['Active', true, selected: true], ['Inactive', false] ] %>
+        <br>What days is the instructor available?<br>
+        <% @days.each do |day| %>
+            <input type="checkbox" name="<%= day %>" value="<%= day %>"><%= day %><br>
+        <% end %>
     </div>
 
     <%= f.submit %>

@@ -10,12 +10,20 @@ class InstructorsController < ApplicationController
     end
 
     def new
-        
+        @days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     end
     
     def create
         instructor = Instructor.create(allowed_params)
-        starting_availabilities(instructor)
+        instructor.update(active: true)
+        desired_days = []
+        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        days.each do |each_day|
+            if params[each_day] == each_day
+                desired_days << each_day
+            end
+        end
+        starting_availabilities(instructor,desired_days)
         redirect_to instructor_path(instructor)
     end
 
@@ -65,13 +73,12 @@ class InstructorsController < ApplicationController
         )
     end
 
-    def starting_availabilities(instructor)
-        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    def starting_availabilities(instructor,desired_days)
         start_times = ["1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"]
         end_times = ["1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM"]
-        days.each do |day|
+        desired_days.each do |day|
             start_times.count.times do |index|
-                Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor)
+                Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor, active: true)
             end
         end
     end
