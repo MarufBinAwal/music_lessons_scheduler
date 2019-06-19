@@ -27,7 +27,9 @@ class LessonsController < ApplicationController
 
     def edit
         @lesson = Lesson.find(params[:id])
-        @availabilities = Availability.all
+        @availabilities = Availability.all.select do |each_availability|
+            each_availability.active
+        end
         @students = Student.all
     end
 
