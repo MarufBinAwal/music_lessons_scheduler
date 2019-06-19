@@ -1,4 +1,10 @@
 class InstructorsController < ApplicationController
+    
+    def full_index
+        flash[:full_index] = true
+        redirect_to instructors_path
+    end
+    
     def index
         @instructors = Instructor.all
     end
@@ -31,6 +37,9 @@ class InstructorsController < ApplicationController
 
     def update
         instructor = Instructor.find(params[:id])
+        if allowed_params[:active] == false
+            ###########switch all lessons 'active' to false#################
+        end
         instructor.update(allowed_params)
         redirect_to instructor_path(instructor)
     end
@@ -65,5 +74,9 @@ class InstructorsController < ApplicationController
                 Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor)
             end
         end
+    end
+
+    def deactivate_lessons(instructor)
+        
     end
 end

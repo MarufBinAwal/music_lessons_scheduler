@@ -25,7 +25,7 @@ Instructor.all.each do |instructor|
     temp_days = [days.sample,days.sample,days.sample,days.sample]
     temp_days.uniq.each do |day|
         start_times.count.times do |index|
-            Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor)
+            Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor, active: true)
         end
     end
 end

@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 2019_06_17_170706) do
     t.string "end_time"
     t.string "day"
     t.integer "instructor_id"
+    t.boolean "active"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

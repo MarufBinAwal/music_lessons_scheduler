@@ -1,17 +1,49 @@
-<%= content_tag(:h1, "#{@availability.instructor.full_name} | #{@availability.day} #{@availability.start_time}-#{@availability.end_time}")%>
-
+<%= content_tag(:h1, "#{@availability.instructor.full_name} | #{@availability.day} #{@availability.start_time}-#{@availability.end_time} | #{@status}")%>
+<%= link_to "Edit Availability", edit_availability_path(@availability) %><br><br>
+<% if flash[:full_show] %>
+    <%= link_to "Show Only Active Lessons", availability_path(@availability) %>
+<% else %>
+    <%= link_to "Show Archived Lessons", "/availabilities/#{@availability.id}/all" %>
+<% end %>
+<br><%= link_to "Return to Instructor Schedule", instructor_availabilities_path(@availability.instructor) %>
+<% if flash[:full_show] %>
+    <h3>Active Lessons</h3>
+<% end %>
 <ul>
     <% @availability.lessons.each do |lesson|%>
-        <li>
-            <%= link_to lesson.student.full_name, student_path(lesson.student) %>
-            <%= "-#{lesson.instrument}" %>
-            <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>
-        </li>
+        <% if lesson.active %>
+            <li>
+                <%= link_to lesson.student.full_name, student_path(lesson.student) %>
+                <%= "-#{lesson.instrument}" %>
+                <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>
+            </li>
 
-        <ul>
-            <%= content_tag(:li, "Lesson created by '#{lesson.user}' on #{lesson.created_at}") %>
-            <%= content_tag(:li, "Most recent update was on #{lesson.updated_at}") %>
-            <%= content_tag(:li, "Notes: #{lesson.misc_notes}") %>
-        </ul>
+            <ul>
+                <%= content_tag(:li, "Lesson created by '#{lesson.user}' on #{lesson.created_at}") %>
+                <%= content_tag(:li, "Most recent update was on #{lesson.updated_at}") %>
+                <%= content_tag(:li, "Notes: #{lesson.misc_notes}") %>
+            </ul>
+        <% end %>
     <% end %>
 </ul>
+
+<% if flash[:full_show] %>
+    <h3>Archived Lessons</h3>
+    <ul>
+        <% @availability.lessons.each do |lesson|%>
+            <% if lesson.active==false %>
+                <li>
+                    <%= link_to lesson.student.full_name, student_path(lesson.student) %>
+                    <%= "-#{lesson.instrument}" %>
+                    <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>
+                </li>
+
+                <ul>
+                    <%= content_tag(:li, "Lesson created by '#{lesson.user}' on #{lesson.created_at}") %>
+                    <%= content_tag(:li, "Most recent update was on #{lesson.updated_at}") %>
+                    <%= content_tag(:li, "Notes: #{lesson.misc_notes}") %>
+                </ul>
+            <% end %>
+        <% end %>
+    </ul>
+<% end %>
