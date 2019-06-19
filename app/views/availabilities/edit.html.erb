@@ -1,0 +1,39 @@
+<h1>Edit Availability</h1>
+<%= form_with model: @availability do |f| %>
+
+    <div>
+        <%= f.label :time %>
+        <select name="availability[start_time]" >
+            <% @start_times.count.times do |num| %>
+                <% if @start_times[num] == @availability.start_time %>
+                    <%= content_tag(:option, "#{@start_times[num]} to #{@end_times[num]}", value: @start_times[num], selected: "selected") %>
+                <% else %>
+                    <%= content_tag(:option, "#{@start_times[num]} to #{@end_times[num]}", value: @start_times[num]) %>
+                <% end %>
+            <% end %>
+        </select>
+    </div>
+
+
+    <div>
+        <%= f.label :day %>
+        <select name="availability[day]">
+            <% @days.each do |each_day| %>
+                <% if each_day == @availability.day %>
+                    <%= content_tag(:option, each_day, value: each_day, selected: "selected") %>
+                <% else %>
+                    <%= content_tag(:option, each_day, value: each_day) %>
+                <% end %>
+            <% end %>
+        </select>
+    </div>
+    
+    <div>
+        <%= f.label :instructor %>    
+        <%= collection_select :availability, :instructor_id, Instructor.all, :id, :full_name %>
+    </div>
+
+
+    <%= f.submit %>
+
+<% end %>

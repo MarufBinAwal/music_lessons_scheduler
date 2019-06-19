@@ -1,6 +1,6 @@
 <%= content_tag(:h1, "#{@instructor.full_name} Schedule") %>
 
-<% @instructor.availabilities.each do |availability| %>
+<% @availabilities.each do |availability| %>
     <li>
         <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
         <%= link_to "Show Page", availability_path(availability)%>
