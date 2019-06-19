@@ -1,6 +1,6 @@
 <%= content_tag(:h1, @instructor.full_name) %>
 <%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
-<%= content_tag(:p, "Phone Number: #{@instructor.phone_number}")%>
+<%= content_tag(:p, "Phone Number:"+(number_to_phone(@instructor.phone_number)) )%>
 <%= content_tag(:p, "Email: #{@instructor.email}")%>
 <%= content_tag(:p, "Instruments: #{@instructor.instruments}")%>
 <%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
@@ -8,13 +8,14 @@
 <%= content_tag(:p, "Status: #{@status}") %>
 <%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
 <ul>
-    <p>Lessons</p>
     <% @instructor.availabilities.each do |availability| %>
-        <% if availability.lessons.count != 0 %>
+        <% if availability.active && availability.lessons.count != 0 %>
             <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
             <ul>
                 <% availability.lessons.each do |lesson|%>
-                    <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
+                    <% if lesson.active %>
+                        <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
+                    <% end %>
                 <% end %>
             </ul>
         <% end %>

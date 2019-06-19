@@ -5,6 +5,7 @@ class CreateAvailabilities < ActiveRecord::Migration[5.2]
       t.string :end_time
       t.string :day
       t.integer :instructor_id
+      t.boolean :active
 
       t.timestamps
     end

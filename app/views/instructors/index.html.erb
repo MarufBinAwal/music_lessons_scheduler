@@ -1,9 +1,22 @@
 <h1>Instructors</h1>
-<%= link_to("Create new instructor", new_instructor_path) %>
+<%= link_to("Create new instructor", new_instructor_path) %><br>
+<% if flash[:full_index] %>
+    <%= link_to("Only Active Instructors", '/instructors') %>
+<% else %>
+    <%= link_to("All Instructors", '/instructors/all') %>
+<% end %>
 
 <ul>
     <% @instructors.each do |instructor| %>
-        <li><%= link_to "#{instructor.full_name}", instructor_path(instructor)%><%=": #{instructor.phone_number}, #{instructor.email}"%></li>
+        <% if instructor.active == true || flash[:full_index] %>
+            <li>
+            <%= link_to "#{instructor.full_name}", instructor_path(instructor)%>
+            <%=": #{number_to_phone(instructor.phone_number)}, #{instructor.email}"%>
+            <% if flash[:full_index] %>
+                <ul><%= content_tag(:li, "Active: "+instructor.active.to_s.upcase)%></ul>
+            <% end %>
+            </li>
+        <% end %>
     <% end %>
 </ul>
 

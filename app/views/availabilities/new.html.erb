@@ -11,15 +11,18 @@
     </div>
 
 
-     <div>
+    <div>
         <%= f.label :day %>
-        <%= f.collection_select :day, @DAYS, :to_s, :humanize %>
+        <select name="availability[day]">
+            <% @days.each do |each_day| %>
+                <%= content_tag(:option, each_day, value: each_day) %>
+            <% end %>
+        </select>
     </div>
     
     <div>
         <%= f.label :instructor %>    
         <%= collection_select :availability, :instructor_id, Instructor.all, :id, :full_name %>
-        
     </div>
 
 

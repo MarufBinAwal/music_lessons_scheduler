@@ -1,2 +1,44 @@
-<h1>Lessons</h1>
+<% if flash[:full_index] %>
+    <h1>Archived Lessons</h1>
+    <%= link_to "Show Active Lessons", '/lessons' %>
+<% else %>
+    <h1>Lessons</h1>
+    <%= link_to "Show Archived Lessons", '/lessons/all' %>
+<% end %>
+<% if flash[:full_index] %>
+    <ul>
+        <% @lessons.each do |each_lesson| %>
+            <% if !each_lesson.active %>
+                <li><%= "#{each_lesson.availability.day} #{each_lesson.availability.start_time}-#{each_lesson.availability.end_time}" %></li>
+                    <ul>
+                        <li>Instructor: <%= link_to each_lesson.availability.instructor.full_name, instructor_path(each_lesson.availability.instructor) %></li>
+                        <li>Student: <%= link_to each_lesson.student.full_name, student_path(each_lesson.student) %></li>
+                        <li>Instrument: <%= each_lesson.instrument %>
+                    </ul>
+            <% end %>
+        <% end %>
+    </ul>  
+<% else %>
 
+    <% @instructors.each do |instructor| %>
+        <% if instructor.active %>
+            <%= content_tag(:h3, (link_to instructor.full_name, instructor_path(instructor)))%>
+            <% instructor.availabilities.each do |availability| %>
+                <% if availability.lessons.count != 0 && availability.active %>
+                    <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
+                    <ul>
+                        <% availability.lessons.each do |lesson|%>
+                            <% if lesson.active %>
+                                <li>
+                                    <%= link_to lesson.student.full_name, student_path(lesson.student) %>
+                                    <%= "-#{lesson.instrument}" %>
+                                </li>
+                            <% end %>
+                        <% end %>
+                    </ul>
+                <% end %>
+            <% end %>
+        <% end %>
+    <% end %>
+
+<% end %>

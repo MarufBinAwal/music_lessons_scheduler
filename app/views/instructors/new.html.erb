@@ -1,27 +1,27 @@
 <%= form_with model: Instructor.new do | f | %>
     <div>
-        <%= f.label :first_name%>
-        <%= f.text_field :first_name%>
+        <%= f.label :first_name %>
+        <%= f.text_field :first_name, required: true %>
     </div>
 
     <div>
-        <%= f.label :last_name%>
-        <%= f.text_field :last_name%>
+        <%= f.label :last_name %>
+        <%= f.text_field :last_name, required: true%>
     </div>
 
      <div>
-        <%= f.label :date_of_birth%>
-        <%= f.text_field :date_of_birth%>
+        <%= f.label :date_of_birth %>
+        <%= f.date_field :date_of_birth %>
     </div>
 
      <div>
-        <%= f.label :phone_number%>
-        <%= f.text_field :phone_number%>
+        <%= f.label :phone_number %>
+        <%= f.phone_field :phone_number, required: true%>
     </div>
 
      <div>
-        <%= f.label :email%>
-        <%= f.text_field :email%>
+        <%= f.label :email %>
+        <%= f.email_field :email , required: true %>
     </div>
     <div>
         <%= f.label :password%>
@@ -30,7 +30,7 @@
 
      <div>
         <%= f.label :instruments %>
-        <%= f.text_field :instruments %>
+        <%= f.text_field :instruments, required: true %>
     </div>
 
      <div>
@@ -44,8 +44,10 @@
     </div>
 
     <div>
-        <%= f.label :status %>
-        <%= f.select :active, [ ['Active', true], ['Inactive', false] ] %>
+        <br>What days is the instructor available?<br>
+        <% @days.each do |day| %>
+            <input type="checkbox" name="<%= day %>" value="<%= day %>"><%= day %><br>
+        <% end %>
     </div>
 
     <%= f.submit %>

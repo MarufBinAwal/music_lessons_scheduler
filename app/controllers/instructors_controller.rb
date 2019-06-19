@@ -1,17 +1,29 @@
 class InstructorsController < ApplicationController
     
-
+    def full_index
+        flash[:full_index] = true
+        redirect_to instructors_path
+    end
+    
     def index
         @instructors = Instructor.all
     end
 
     def new
-        
+        @days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
     end
     
     def create
         instructor = Instructor.create(allowed_params)
-        starting_availabilities(instructor)
+        instructor.update(active: true)
+        desired_days = []
+        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+        days.each do |each_day|
+            if params[each_day] == each_day
+                desired_days << each_day
+            end
+        end
+        starting_availabilities(instructor,desired_days)
         redirect_to instructor_path(instructor)
     end
 
@@ -26,15 +38,17 @@ class InstructorsController < ApplicationController
 
     def edit
         @instructor = Instructor.find(params[:id])
-        @availabilities = Availability.all.select do | each_a |
-            each_a.instructor == @instructor
-        end
     end
 
     def update
         instructor = Instructor.find(params[:id])
         instructor.update(allowed_params)
-        redirect_to instructor_path(instructor)
+        if instructor.active == false
+            instructor.deactivate_availabilities
+            redirect_to instructors_path
+        else
+            redirect_to instructor_path(instructor)
+        end
     end
 
     def destroy
@@ -42,6 +56,8 @@ class InstructorsController < ApplicationController
         instructor.destroy
         redirect_to instructors_path
     end
+
+    private
 
     def allowed_params
         params.required(:instructor).permit(
@@ -58,38 +74,12 @@ class InstructorsController < ApplicationController
         )
     end
 
-    # def login_form  
-
-    #     if (flash[:alert])
-    #         @errors = flash[:alert]
-    #     else
-    #         @errors = ""
-    #     end
-    # end
-
-    # def authenticate
-    #     instructor = Instructor.find_by(email:(params[:email]))
-    #     if instructor != nil && instructor.authenticate(params[:password])
-    #         session[:instructor_id] = instructor.id
-    #         redirect_to instructor_path(session[:instructor_id])
-    #     else
-    #         flash[:alert] = "Email or password is invalid"
-    #     end
-    # end
-
-
-    # def log_out
-    #     session[:instructor_id] = nil
-    #     redirect_to '/'
-    # end
-    
-    def starting_availabilities(instructor)
-        days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+    def starting_availabilities(instructor,desired_days)
         start_times = ["1:00 PM", "1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM"]
         end_times = ["1:30 PM", "2:00 PM", "2:30 PM", "3:00 PM", "3:30 PM", "4:00 PM", "4:30 PM", "5:00 PM", "5:30 PM", "6:00 PM", "6:30 PM", "7:00 PM", "7:30 PM", "8:00 PM", "8:30 PM", "9:00 PM"]
-        days.each do |day|
+        desired_days.each do |day|
             start_times.count.times do |index|
-                Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor)
+                Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor, active: true)
             end
         end
     end
