@@ -30,18 +30,17 @@ class InstructorsController < ApplicationController
 
     def edit
         @instructor = Instructor.find(params[:id])
-        @availabilities = Availability.all.select do | each_a |
-            each_a.instructor == @instructor
-        end
     end
 
     def update
         instructor = Instructor.find(params[:id])
-        if allowed_params[:active] == false
-            ###########switch all lessons 'active' to false#################
-        end
         instructor.update(allowed_params)
-        redirect_to instructor_path(instructor)
+        if instructor.active == false
+            instructor.deactivate_availabilities
+            redirect_to instructors_path
+        else
+            redirect_to instructor_path(instructor)
+        end
     end
 
     def destroy
@@ -51,6 +50,7 @@ class InstructorsController < ApplicationController
     end
 
     private
+
     def allowed_params
         params.required(:instructor).permit(
             :first_name,
@@ -74,9 +74,5 @@ class InstructorsController < ApplicationController
                 Availability.create(start_time: start_times[index], end_time: end_times[index], day: day, instructor: instructor)
             end
         end
-    end
-
-    def deactivate_lessons(instructor)
-        
     end
 end

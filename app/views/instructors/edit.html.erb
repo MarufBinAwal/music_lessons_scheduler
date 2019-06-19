@@ -44,7 +44,7 @@
         <%= f.label :status %>
         <%= f.select :active, [ ['Active', true], ['Inactive', false] ] %>
         <% if @instructor.active %>
-            <%= "(If the status of this instructor is changed to inactive, all lessons associated with this instructor will be archived)" %>
+            <%= "(If the status of this instructor is changed to inactive, all availabilities and lessons associated with this instructor will be deactived/archived)" %>
         <% end %>
     </div>
 

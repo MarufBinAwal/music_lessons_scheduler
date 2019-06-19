@@ -7,4 +7,11 @@ class Instructor < ApplicationRecord
         "#{self.first_name} #{self.last_name}"
     end
 
+    def deactivate_availabilities
+        self.availabilities.each do |availability|
+            availability.deactivate_lessons
+            availability.update(active: false)
+        end
+    end
+
 end
