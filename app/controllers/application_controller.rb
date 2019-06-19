@@ -1,10 +1,22 @@
 class ApplicationController < ActionController::Base
+    before_action :logged_in
+   before_action :require_login
 
-    # before_action :current_instructor
 
-    # def current_instructor
-    #     @current_instructor = Instructor.find(session[:instructor_id])
-    # end
-    
+    def logged_in
+        if !session.include? :instructor_id
+            redirect_to '/'
+        end 
+    end 
+
+
+
+
+    private
+
+    def require_login
+        return head(:forbidden) unless session.include? :instructor_id
+    end 
+
 
 end

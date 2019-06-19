@@ -1,7 +1,7 @@
 class InstructorsController < ApplicationController
-    
+    skip_before_action :require_login, only: [:login_form, :authenticate]
+    skip_before_action :logged_in, only: [:login_form, :authenticate]
 
-    
     def index
         @instructors = Instructor.all
     end
@@ -59,8 +59,13 @@ class InstructorsController < ApplicationController
         )
     end
 
-    def login_form
-        
+    def login_form  
+
+        if (flash[:alert])
+            @errors = flash[:alert]
+        else
+            @errors = ""
+        end
     end
 
     def authenticate
@@ -69,9 +74,10 @@ class InstructorsController < ApplicationController
             session[:instructor_id] = instructor.id
             redirect_to instructor_path(session[:instructor_id])
         else
-            #error
+            flash[:alert] = "Email or password is invalid"
         end
     end
+
 
     def log_out
         session[:instructor_id] = nil
@@ -88,4 +94,6 @@ class InstructorsController < ApplicationController
             end
         end
     end
+
+
 end

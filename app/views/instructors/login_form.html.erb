@@ -1,6 +1,6 @@
 <h1>Login</h1>
-
-<%= form_with method:'POST', url: 'instructors/authenticate' do |form| %>
+<%= @errors %>
+<%= form_with method:'POST', url: '/instructors/authenticate' do |form| %>
     <div>
         <%= form.label :email %>
         <%= form.text_field :email %>
