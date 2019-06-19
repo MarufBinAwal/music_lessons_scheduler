@@ -3,6 +3,9 @@
 
 <ul>
     <% @students.each do |student| %>
-        <li><%= link_to "#{student.full_name}", student_path(student)%><%=": #{student.phone_number}, #{student.email}"%></li>
+        <li>
+        <%= link_to "#{student.full_name}:", student_path(student)%>
+        <%=" #{number_to_phone(student.phone_number)}, #{student.email}"%>
+        </li>
     <% end %>
 </ul>

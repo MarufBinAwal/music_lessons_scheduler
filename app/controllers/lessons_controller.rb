@@ -35,12 +35,17 @@ class LessonsController < ApplicationController
 
     def update
         lesson = Lesson.find(params[:id])
-        lesson.updated(allowed_params)
+        lesson.update(allowed_params)
+        if !lesson.active
+            #update lesson.active with user who archived the lesson
+        end
         redirect_to student_path(lesson.student)
     end
 
 
-    private def lesson_params 
+    private
+    
+    def allowed_params 
         params.require(:lesson).permit(
             :availability_id,
             :student_id,

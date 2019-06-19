@@ -11,7 +11,7 @@
         <% if instructor.active == true || flash[:full_index] %>
             <li>
             <%= link_to "#{instructor.full_name}", instructor_path(instructor)%>
-            <%=": #{instructor.phone_number}, #{instructor.email}"%>
+            <%=": #{number_to_phone(instructor.phone_number)}, #{instructor.email}"%>
             <% if flash[:full_index] %>
                 <ul><%= content_tag(:li, "Active: "+instructor.active.to_s.upcase)%></ul>
             <% end %>
