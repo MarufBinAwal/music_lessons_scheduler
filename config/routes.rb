@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   
   get '/', to: "instructors#login_form"
 
-  post '/instructors/authenticate', to: "instructors#authenticate"
+  post '/authenticate', to: "application#authenticate"
 
-  get '/logout', to: "instructors#log_out"
+  get '/logout', to: "application#log_out"
   
   
 end

@@ -1,6 +1,5 @@
 class InstructorsController < ApplicationController
-    skip_before_action :require_login, only: [:login_form, :authenticate]
-    skip_before_action :logged_in, only: [:login_form, :authenticate]
+    
 
     def index
         @instructors = Instructor.all
@@ -59,30 +58,30 @@ class InstructorsController < ApplicationController
         )
     end
 
-    def login_form  
+    # def login_form  
 
-        if (flash[:alert])
-            @errors = flash[:alert]
-        else
-            @errors = ""
-        end
-    end
+    #     if (flash[:alert])
+    #         @errors = flash[:alert]
+    #     else
+    #         @errors = ""
+    #     end
+    # end
 
-    def authenticate
-        instructor = Instructor.find_by(email:(params[:email]))
-        if instructor != nil && instructor.authenticate(params[:password])
-            session[:instructor_id] = instructor.id
-            redirect_to instructor_path(session[:instructor_id])
-        else
-            flash[:alert] = "Email or password is invalid"
-        end
-    end
+    # def authenticate
+    #     instructor = Instructor.find_by(email:(params[:email]))
+    #     if instructor != nil && instructor.authenticate(params[:password])
+    #         session[:instructor_id] = instructor.id
+    #         redirect_to instructor_path(session[:instructor_id])
+    #     else
+    #         flash[:alert] = "Email or password is invalid"
+    #     end
+    # end
 
 
-    def log_out
-        session[:instructor_id] = nil
-        redirect_to '/'
-    end
+    # def log_out
+    #     session[:instructor_id] = nil
+    #     redirect_to '/'
+    # end
     
     def starting_availabilities(instructor)
         days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]

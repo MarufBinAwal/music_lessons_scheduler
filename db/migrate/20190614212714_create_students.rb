@@ -8,6 +8,7 @@ class CreateStudents < ActiveRecord::Migration[5.2]
       t.string :email
       t.text :misc_notes
       t.text :billing_notes
+      t.text :password_digest
       
       t.timestamps
     end
