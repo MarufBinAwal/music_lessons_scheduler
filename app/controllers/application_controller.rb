@@ -1,8 +1,7 @@
 class ApplicationController < ActionController::Base
-#    before_action :logged_in
-#    before_action :require_login
-#    skip_before_action :require_login, only: [:login_form, :authenticate]
-#    skip_before_action :logged_in, only: [:login_form, :authenticate]
+
+   before_action :logged_in, except: [:login_form, :authenticate]
+
 
 
    def login_form  
@@ -33,29 +32,40 @@ def authenticate
         else
             flash[:alert] = "Email or password is invalid"
         end
+    elsif value == "admin"
+        admin = Admin.find_by(email:(params[:email]))
+        if admin != nil && admin.authenticate(params[:password])
+            session[:admin_id] = admin.id
+            redirect_to lessons_path
+        else
+            flash[:alert] = "Email or password is invalid"
+        end
     end
 end
 
 
     def logged_in
-        if !session.include?(:instructor_id) || !session.include?(:student_id) 
+        unless session.include?(:instructor_id) || session.include?(:student_id) || session.include?(:admin_id)
             redirect_to '/'
         end 
     end 
 
     
     def log_out
+        session[:student_id] = nil
         session[:instructor_id] = nil
+        session[:admin_id] = nil
         redirect_to '/'
     end
 
 
 
-    # private
+    private
 
-    # def require_login
-    #     return head(:forbidden) unless session.include?(:instructor_id) || session.include?(:student_id)
-    # end 
+    def require_login
+        return head(:forbidden) unless session.include?(:instructor_id) || session.include?(:student_id)
+        redirect_to '/'
+    end 
 
 
 end

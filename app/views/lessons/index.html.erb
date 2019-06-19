@@ -1,16 +1,2 @@
 <h1>Lessons</h1>
-<% @lessons.each do | i | %>
-<ul>
-    <li>
-        <%= i.day %>
-        <%= i.start_time %>
-        <%= i.end_time %>
-        <%= i.instrument %>
-        <%= i.misc_notes %>
-        <%= i.price_of_lesson %>
-        <%= i.user %>
-        <%= i.active %>
-<%= link_to "View", "/lessons/#{i.id}"%>
-    </li>
-</ul>
-<% end %>
+

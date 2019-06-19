@@ -34,3 +34,7 @@ end
 
     Lesson.create(availability: Instructor.all.sample.availabilities.sample, student: Student.all.sample, instrument: instruments.sample, price_of_lesson: 100, active: true, user: "God" )
 end
+
+    Admin.create(name: 'Carlos Barrera', email: 'carlos@gmail.com', password: "5678")
+    Admin.create(name: 'Roysan Easo', email: 'roy@gmail.com', password: "5678")
+    Admin.create(name: 'Stefan Scepanovic', email: 'scepa@gmail.com', password: "5678")
