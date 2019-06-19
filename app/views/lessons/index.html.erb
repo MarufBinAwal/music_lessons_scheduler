@@ -1,16 +1,18 @@
 <h1>Lessons</h1>
-<% @lessons.each do | i | %>
-<ul>
-    <li>
-        <%= i.day %>
-        <%= i.start_time %>
-        <%= i.end_time %>
-        <%= i.instrument %>
-        <%= i.misc_notes %>
-        <%= i.price_of_lesson %>
-        <%= i.user %>
-        <%= i.active %>
-<%= link_to "View", "/lessons/#{i.id}"%>
-    </li>
-</ul>
+
+<% @instructors.each do |instructor| %>
+    <%= content_tag(:h3, (link_to instructor.full_name, instructor_path(instructor)))%>
+    <% instructor.availabilities.each do |availability| %>
+        <% if availability.lessons.count != 0 %>
+            <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
+            <ul>
+                <% availability.lessons.each do |lesson|%>
+                    <li>
+                    <%= link_to lesson.student.full_name, student_path(lesson.student) %>
+                    <%= "-#{lesson.instrument}" %>
+                    </li>
+                <% end %>
+            </ul>
+        <% end %>
+    <% end %>
 <% end %>

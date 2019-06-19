@@ -9,10 +9,13 @@
 
 <ul>
     <% @student.lessons.each do |lesson| %>
-        <li><%= "#{lesson.day} #{lesson.start_time} to #{lesson.end_time}" %></li>
+        <li>
+            <%= "#{lesson.availability.day} #{lesson.availability.start_time} to #{lesson.availability.end_time}" %>
+            <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>
+        </li>
         <ul>
             <li>Active: <%= lesson.active.to_s.capitalize %>
-            <li>Instructor: <%= lesson.instructor.full_name %></li>
+            <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
             <li>Instrument: <%= lesson.instrument %></li>
             <li>Price per month: $<%= lesson.price_of_lesson %></li>
             <li>Created by: <%= lesson.user %></li>

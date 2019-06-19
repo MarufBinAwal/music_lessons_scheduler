@@ -1,7 +1,8 @@
 class LessonsController < ApplicationController
 
     def index
-        @lessons = Lesson.all 
+        @availabilities = Availability.all
+        @instructors = Instructor.all
     end     
 
     def show
