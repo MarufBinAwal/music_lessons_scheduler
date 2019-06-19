@@ -16,7 +16,6 @@
             <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
             <%= link_to "Show Page", availability_path(availability)%>
             <%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
-            <%= link_to "Delete", availability, method: :delete, data: { confirm: "Are you sure you want to delete this availability? Any lessons tied to this availability will also be deleted." } %>
             <ol>
                 <% availability.lessons.each do |lesson|%>
                     <% if lesson.active %>
