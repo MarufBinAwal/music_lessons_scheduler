@@ -6,3 +6,5 @@
         <li><%= link_to "#{instructor.full_name}", instructor_path(instructor)%><%=": #{instructor.phone_number}, #{instructor.email}"%></li>
     <% end %>
 </ul>
+
+<%= link_to("Logout", '/logout') %>

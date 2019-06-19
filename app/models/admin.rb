@@ -1,2 +1,4 @@
-class Admin::Base < ApplicationRecord
+class Admin < ApplicationRecord
+    has_secure_password
+
 end
