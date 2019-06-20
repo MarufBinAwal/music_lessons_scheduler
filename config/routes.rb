@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   end
   resources :availabilities, only: [:show,:edit,:update,:new,:create, :destroy]
   
-  get '/', to: "admin#login_form"
+  get '/', to: "admins#login_form"
   resources :admins, except: [:show]
 
   post '/authenticate', to: "application#authenticate"
