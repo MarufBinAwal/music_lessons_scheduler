@@ -1,6 +1,5 @@
 class StudentsController < ApplicationController
-    
-
+    before_action :admin_logged_in, except: [:show, :login_form, :authenticate]
 
     def index
         @students = Student.all
@@ -12,8 +11,20 @@ class StudentsController < ApplicationController
     end
 
     def show
+        anyone_logged_in
         @student = Student.find(params[:id])
-        
+        instructors = @student.lessons.map do |lesson|
+            lesson.availability.instructor.id
+        end
+        if !session[:admin_id] && session[:student_id]!= @student.id
+            if session[:instructor_id]
+                if !instructors.include?(session[:instructor_id])
+                    redirect_to instructor_path(session[:instructor_id])
+                end
+            else
+                redirect_to student_path(session[:student_id])
+            end
+        end
     end
 
     def edit

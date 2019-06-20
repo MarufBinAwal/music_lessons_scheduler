@@ -1,5 +1,7 @@
 class AvailabilitiesController < ApplicationController
-    
+    before_action :admin_logged_in, except: [:full_index, :index, :full_show, :show, :login_form, :authenticate]
+    before_action :staff_logged_in, only: [:full_index, :index, :full_show, :show]
+
     def full_index
         flash[:full_index] = true
         redirect_to instructor_availabilities_path(params[:instructor_id])
@@ -7,6 +9,9 @@ class AvailabilitiesController < ApplicationController
 
     def index
         @instructor = Instructor.find(params[:instructor_id])
+        if !session[:admin_id] && session[:instructor_id]!= @instructor.id
+            redirect_to instructor_path(session[:instructor_id])
+        end
 
         @availabilities = sorted_availabilities(@instructor.availabilities)
     end
@@ -18,6 +23,9 @@ class AvailabilitiesController < ApplicationController
 
     def show
         @availability = Availability.find(params[:id])
+        if !session[:admin_id] && session[:instructor_id]!= @availability.instructor.id
+            redirect_to instructor_path(session[:instructor_id])
+        end
         if @availability.active
             @status = "Active"
         else

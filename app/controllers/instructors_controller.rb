@@ -1,5 +1,6 @@
 class InstructorsController < ApplicationController
-    
+    before_action :admin_logged_in, except: [:show, :login_form, :authenticate]
+
     def full_index
         flash[:full_index] = true
         redirect_to instructors_path
@@ -28,7 +29,11 @@ class InstructorsController < ApplicationController
     end
 
     def show
+        staff_logged_in
         @instructor = Instructor.find(params[:id])
+        if !session[:admin_id] && session[:instructor_id]!= @instructor.id
+            redirect_to instructor_path(session[:instructor_id])
+        end
         if (@instructor.active == true)
             @status = "Active"
         else
@@ -83,6 +88,12 @@ class InstructorsController < ApplicationController
             end
         end
     end
+
+    def instructor_logged_in
+        unless session.include?(:instructor_id)
+            redirect_to '/'
+        end 
+    end 
 
 
 end
