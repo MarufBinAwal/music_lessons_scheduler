@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
 
   get '/instructors/all', to: 'instructors#full_index'
   get '/availabilities/:id/all', to: 'availabilities#full_show'
@@ -13,7 +12,8 @@ Rails.application.routes.draw do
   end
   resources :availabilities, only: [:show,:edit,:update,:new,:create, :destroy]
   
-  get '/', to: "instructors#login_form"
+  get '/', to: "admin#login_form"
+  resources :admins, except: [:show]
 
   post '/authenticate', to: "application#authenticate"
 

@@ -1,0 +1,12 @@
+<h1>Admins</h1>
+<%= link_to "Create an admin", new_admin_path %>
+<ul>
+    <% @admins.each do |admin| %>
+        <li>
+            <%= "Name: #{admin.name}" %>
+            <%= "Email: #{admin.email}" %>
+            <%= link_to "Edit", edit_admin_path(admin) %>
+            <%= link_to "Delete", admin, method: :delete, data: { confirm: "Are you sure you want to delete this admin?" } %>
+        </li>
+    <% end %>
+</ul>

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
     before_action :anyone_logged_in, except: [:login_form, :authenticate]
+    
 
 
 

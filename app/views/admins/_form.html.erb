@@ -1,0 +1,16 @@
+<div>
+    <%= form.label :name %>
+    <%= form.text_field :name, required: true %>
+</div>
+
+<div>
+    <%= form.label :email %>(this will be your username)
+    <%= form.email_field :email, required: true %>
+</div>
+
+<div>
+    <%= form.label :password%>
+    <%= form.text_field :password, required: true %>
+</div>
+
+<%= form.submit%>
