@@ -1,10 +1,10 @@
 <% if flash[:full_index] %>
-    <h1>Archived Lessons</h1>
-    <%= link_to "Show Active Lessons", '/lessons' %>
+    <h1 class="page-title">Archived Lessons</h1>
 <% else %>
-    <h1>Lessons</h1>
-    <%= link_to "Show Archived Lessons", '/lessons/all' %>
+    <h1 class="page-title">Lessons</h1>
 <% end %>
+
+<div class="lessons container-fluid row">
 <% if flash[:full_index] %>
     <ul>
         <% @lessons.each do |each_lesson| %>
@@ -22,7 +22,9 @@
 
     <% @instructors.each do |instructor| %>
         <% if instructor.active %>
-            <%= content_tag(:h3, (link_to instructor.full_name, instructor_path(instructor)))%>
+
+            <div class="col-md-3">
+            <%= content_tag(:button, instructor.full_name, type:"button", onclick:"location.href = '/instructors/#{instructor.id}';", class:"btn btn-info") %>
             <% instructor.availabilities.each do |availability| %>
                 <% if availability.lessons.count != 0 && availability.active %>
                     <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
@@ -30,7 +32,7 @@
                         <% availability.lessons.each do |lesson|%>
                             <% if lesson.active %>
                                 <li>
-                                    <%= link_to lesson.student.full_name, student_path(lesson.student) %>
+                                    <%= link_to lesson.student.full_name, student_path(lesson.student)%>
                                     <%= "-#{lesson.instrument}" %>
                                 </li>
                             <% end %>
@@ -38,9 +40,18 @@
                     </ul>
                 <% end %>
             <% end %>
+            </div>
+
         <% end %>
     <% end %>
 
 <% end %>
+</div>
 
-<%= link_to("Logout", '/logout') %>
+<div class="bottom-bar">
+<% if flash[:full_index] %>
+    <%= content_tag(:button, "Show Active Lessons", type:"button", onclick:"location.href = '/lessons';", class:"btn btn-info change-list") %>
+<% else %>
+    <%= content_tag(:button, "Show Archived Lessons", type:"button", onclick:"location.href = '/lessons/all';", class:"btn btn-info change-list") %>
+<% end %>
+</div>

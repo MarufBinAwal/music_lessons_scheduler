@@ -1,13 +1,12 @@
 class ApplicationController < ActionController::Base
     before_action :anyone_logged_in, except: [:login_form, :authenticate]
-    
-
 
 
    
 
 
    def login_form
+        reset_session
         if (flash[:alert])
             @errors = flash[:alert]
         else
@@ -54,9 +53,7 @@ class ApplicationController < ActionController::Base
 
     
     def log_out
-        session[:student_id] = nil
-        session[:instructor_id] = nil
-        session[:admin_id] = nil
+        reset_session
         redirect_to '/'
     end
 

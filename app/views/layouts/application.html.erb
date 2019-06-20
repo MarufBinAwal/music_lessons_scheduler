@@ -1,7 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<style>
+  body{
+    background-color: pink;
+  }
+  .btn-info:hover{
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+  }
+  .btn{
+    padding:5px;
+  }
+  .container-fluid{
+    justify-content: flex-start;
+    margin-bottom: 0px;
+    margin-top: 0px;
+  }
+  .col-md-3{
+    text-align: center;
+    padding: 5px;
+  }
+  ul {
+    list-style-type: none;
+  }
+
+  .nav-bar{
+    background-color: #1763BA;
+    color: white;
+    display:flex;
+    width: 100%;
+    justify-content: space-between;
+    padding-left:10px;
+    padding-bottom: 0px;
+  }
+  .nav-btns{
+    justify-content: flex-end;
+  }
+  .nav-btn{
+    height: 100%;
+  }
+  .main-title{
+    justify-content: flex-start;
+    margin-bottom:0px;
+  }
+  .bottom-bar{
+    
+  }
+
+  .page-title{
+    color: #1763BA;
+    text-align: center;
+  }
+  .change-list{
+    font-size:20px;
+    padding: 2px;
+    width: 100%;
+  }
+
+</style>
+
   <head>
     <title>Music Lessons Scheduler</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,7 +70,23 @@
   </head>
 
   <body>
-  
+
+
+    <div class="nav-bar">
+
+      <div>
+        <h3 class="main-title">Flatiron Music Lessons</h3>
+      </div>
+
+      <div class="nav-btns">
+        <%= content_tag(:button, "Logout", type:"button", onclick:"location.href = '/logout';", class:"btn-info nav-btn") %>
+      </div>
+
+    </div>
+
+
     <%= yield %>
+  
   </body>
+
 </html>
