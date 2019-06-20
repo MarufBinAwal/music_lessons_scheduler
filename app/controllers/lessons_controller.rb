@@ -1,4 +1,6 @@
 class LessonsController < ApplicationController
+    before_action :admin_logged_in, except: [:edit, :update, :login_form, :authenticate]
+    before_action :staff_logged_in, only: [:edit, :update]
 
     def full_index
         flash[:full_index] = true
@@ -21,12 +23,11 @@ class LessonsController < ApplicationController
         redirect_to student_path(lesson.student)
     end
 
-    def show
-        @lesson = Lesson.find(params[:id])
-    end 
-
     def edit
         @lesson = Lesson.find(params[:id])
+        if !session[:admin_id] && session[:instructor_id]!= @lesson.availability.instructor.id
+            redirect_to instructor_path(session[:instructor_id])
+        end
         @availabilities = Availability.all.select do |each_availability|
             each_availability.active
         end
@@ -35,9 +36,14 @@ class LessonsController < ApplicationController
 
     def update
         lesson = Lesson.find(params[:id])
+        if !session[:admin_id] && session[:instructor_id]!= lesson.availability.instructor.id
+            redirect_to instructor_path(session[:instructor_id])
+        end
         lesson.update(allowed_params)
         if !lesson.active
-            #update lesson.active with user who archived the lesson
+            #make so only instructor can archive a lesson
+            admin = Admin.find(session[:admin_id])
+            lesson.update(user: admin.name)
         end
         redirect_to student_path(lesson.student)
     end
