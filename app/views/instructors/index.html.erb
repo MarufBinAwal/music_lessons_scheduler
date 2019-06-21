@@ -12,7 +12,8 @@
 
 <div class="main">
 <h1>Instructors</h1>
-
+<%= content_tag(:a, "Create Instructor", href:"/instructors/new", class:"btn btn-info") %>
+           
 <ul>
     <% @instructors.each do |instructor| %>
         <% if instructor.active == true || flash[:full_index] %>

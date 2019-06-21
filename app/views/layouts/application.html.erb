@@ -127,7 +127,7 @@
 </style>
 
   <head>
-    <title>Music Lessons Scheduler</title>
+    <title>Music School</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -141,7 +141,7 @@
     <div class="nav-bar">
 
     <h4 class="main-title">
-    Flatiron Music Lessons:
+    current user:
     <% if session[:student_id] %>
             <%= Student.find(session[:student_id]).full_name%>
     <% elsif session[:instructor_id] %>
@@ -151,19 +151,6 @@
     <% end %>
     </h4>
     <div>
-
-      <% if session[:admin_id] %>
-        <div class="dropdown">
-          <button class="dropbtn btn btn-info">Page Options</button>
-          <div class="dropdown-content">
-            <% if request.original_url == 'http://localhost:3000/instructors' %>
-              <%= content_tag(:a, "Create Instructor", href:"/instructors/new", class:"btn btn-info") %>
-            <% elsif request.original_url == 'http://localhost:3000/instructors' %>
-
-            <% end %>
-          </div>
-        </div>
-      <% end %>
 
 
       <div class="dropdown">
@@ -181,6 +168,15 @@
         </div>
       </div>
 
+    <div class="dropdown menu" aria-labelledby="dropdownMenuButton">
+        <% if session[:instructor_id] %>
+            <%= content_tag(:a, "Schedule", href:"/instructors/#{session[:instructor_id]}/availabilities", class:"btn btn-info") %>
+            <%= content_tag(:a, "Home", href:"/instructors/#{session[:instructor_id]}", class:"btn btn-info") %>
+        <% elsif session[:admin_id] %>
+
+        <% end %>
+      
+          <%= content_tag(:a, "Logout", href:"/logout", class:"btn btn-info") %>
     </div>
 
   </div>

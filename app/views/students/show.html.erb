@@ -24,8 +24,10 @@ ul {
         <%= content_tag(:p, "Email: #{@student.email}")%>
         <%= content_tag(:p, "Notes: #{@student.misc_notes}")%>
         <%= content_tag(:p, "Billing Information: #{@student.billing_notes}")%>
-        <%= link_to("Edit this student", edit_student_path(@student)) %><br>
-        <%= link_to("Return to Index", students_path) %>
+        <% if session[:admin_id] %>
+            <%= link_to("Edit this student", edit_student_path(@student)) %><br>
+            <%= link_to("Return to Index", students_path) %>
+        <% end %>
     </div>
 
 <h3>Current Lessons</h3>
