@@ -6,12 +6,13 @@
     <% if availability.active %>
 
         <li>
-            <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
             <% if availability.lessons.count > 0 || session[:admin_id] %>
-                <%= link_to "Class details", availability_path(availability)%>
+                <%= link_to "#{availability.day}: #{availability.start_time} to #{availability.end_time}", availability_path(availability)%>
+            <% else %>
+                <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
             <% end %>
             <% if session[:admin_id] %>
-                <%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
+                <br><%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
             <% end %>
             <ol>
                 <% availability.lessons.each do |lesson|%>
