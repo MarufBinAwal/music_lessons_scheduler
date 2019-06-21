@@ -79,7 +79,7 @@
 </style>
 
   <head>
-    <title>Music Lessons Scheduler</title>
+    <title>Music School</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -93,7 +93,7 @@
     <div class="nav-bar">
 
     <h4 class="main-title">
-    Flatiron Music Lessons:
+    current user:
     <% if session[:student_id] %>
             <%= Student.find(session[:student_id]).full_name%>
     <% elsif session[:instructor_id] %>
@@ -110,6 +110,7 @@
         <% elsif session[:admin_id] %>
 
         <% end %>
+      
           <%= content_tag(:a, "Logout", href:"/logout", class:"btn btn-info") %>
     </div>
 
