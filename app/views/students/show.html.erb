@@ -4,7 +4,9 @@
     text-align: center;
     background-color: #00000060;
 }
-
+ul {
+    margin-left:0px;
+}
 
 </style>
 
@@ -36,7 +38,6 @@
                     <%= content_tag(:button, "Edit Lesson", type:"button", onclick:"location.href = '/lessons/#{lesson.id}/edit';", class:"btn btn-info") %>
                 <% end %>
             </li>
-            <ul>
                 <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
                     <ul>
                         <li>Phone number: <%= number_to_phone(lesson.availability.instructor.phone_number) %></li>
