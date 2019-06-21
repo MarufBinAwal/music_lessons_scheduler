@@ -90,13 +90,15 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         <%= form.password_field :password %>
     </div>
     <div>
-        <%= form.label :select %>
-        <select name="user">
+        <%= form.label :select %><br>
+        <select name="user" >
             <option value="student">Student</option>
             <option value="instructor">Instructor</option>
             <option value="admin">Admin</option>
         </select> 
-    </div>
+    </div><br>
 
-    <%= form.submit %>
-<% end %> -->
+    <%=  form.submit class: "btn btn-primary btn-block btn-large" %>
+<% end %>
+
+</body>
