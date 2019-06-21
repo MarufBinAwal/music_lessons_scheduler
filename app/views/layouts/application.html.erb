@@ -152,19 +152,6 @@
     </h4>
     <div>
 
-      <% if session[:admin_id] %>
-        <div class="dropdown">
-          <button class="dropbtn btn btn-info">Page Options</button>
-          <div class="dropdown-content">
-            <% if request.original_url == 'http://localhost:3000/instructors' %>
-              <%= content_tag(:a, "Create Instructor", href:"/instructors/new", class:"btn btn-info") %>
-            <% elsif request.original_url == 'http://localhost:3000/instructors' %>
-
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-
 
       <div class="dropdown">
         <button class="dropbtn btn btn-info">Menu</button>

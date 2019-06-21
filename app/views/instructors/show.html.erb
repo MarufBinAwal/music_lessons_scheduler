@@ -12,6 +12,7 @@
 
 <div class="main">
         <%= content_tag(:h1, @instructor.full_name) %>
+        <%= content_tag(:a, "Edit Instructor", href:"/instructors/#{@instructor.id}/edit", class:"btn btn-info") %>
         <%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
         <%= content_tag(:p, "Phone Number:"+(number_to_phone(@instructor.phone_number)) )%>
         <%= content_tag(:p, "Email: #{@instructor.email}")%>
@@ -20,6 +21,7 @@
         <%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
         <%= content_tag(:p, "Status: #{@status}") %>
         <%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
+        
 </div>
 <div class="secondary">
     <% @instructor.availabilities.each do |availability| %>
