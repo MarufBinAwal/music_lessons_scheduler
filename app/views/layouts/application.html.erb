@@ -20,7 +20,7 @@
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
   }
   .btn{
-    padding:5px;
+    padding:2px;
   }
   .container-fluid{
     justify-content: flex-start;
@@ -41,20 +41,21 @@
 
 
   .nav-bar{
-    background-color: #1763BA;
     color: white;
     display:flex;
     width: 100%;
     justify-content: space-between;
-    padding-left:0px;
+    padding-left:10px;
+    padding-right:10px;
     padding-bottom: 0px;
     flex-wrap: nowrap;
+    top: 0;
   }
   .main-title{
     margin-bottom: 0px;
   }
   .user-name{
-    margin-bottom:0px
+    margin-bottom:0px;
   }
   .bottom-bar{
     position: fixed;
@@ -72,6 +73,50 @@
     width: 100%;
   }
 
+  /* The look of the dropdown button before hover*/
+  .dropbtn {
+    color: white;
+    padding: 5px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+  }
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  right: 0;
+  position: absolute;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: yellow}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
 </style>
 
   <head>
@@ -99,7 +144,9 @@
     <% end %>
     </h4>
 
-    <div class="dropdown menu" aria-labelledby="dropdownMenuButton">
+    <div class="dropdown">
+      <button class="dropbtn btn btn-info">Menu</button>
+      <div class="dropdown-content">
         <% if session[:instructor_id] %>
             <%= content_tag(:a, "Schedule", href:"/instructors/#{session[:instructor_id]}/availabilities", class:"btn btn-info") %>
             <%= content_tag(:a, "Home", href:"/instructors/#{session[:instructor_id]}", class:"btn btn-info") %>
@@ -107,26 +154,10 @@
 
         <% end %>
           <%= content_tag(:a, "Logout", href:"/logout", class:"btn btn-info") %>
+      </div>
     </div>
 
   </div>
-  <!-- <div class="dropdown">
-
-      <button class="btn btn-info dropdown-toggle">
-        Menu
-      </button>
-
-      <div class="dropdown menu" aria-labelledby="dropdownMenuButton">
-        <% if session[:instructor_id] %>
-            <%= content_tag(:a, "Schedule", href:"/instructors/#{session[:instructor_id]}/availabilities", class:"dropdown-item") %>
-            <%= content_tag(:a, "Home", href:"/instructors/#{session[:instructor_id]}", class:"dropdown-item") %>
-        <% elsif session[:admin_id] %>
-
-        <% end %>
-          <%= content_tag(:a, "Logout", href:"/logout", class:"dropdown-item") %>
-      </div>
-
-    </div> -->
 
     <%= yield %>
   

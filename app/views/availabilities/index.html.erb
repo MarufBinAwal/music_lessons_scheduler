@@ -1,7 +1,5 @@
 <%= content_tag(:h1, "#{@instructor.full_name} Schedule") %>
-
-<br><%= link_to "Return to Instructor Page", instructor_path(@instructor)%>
-<br><br>
+<br>
 
 <% @availabilities.each do |availability| %>
 
@@ -9,8 +7,12 @@
 
         <li>
             <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
-            <%= link_to "Show Page", availability_path(availability)%>
-            <%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
+            <% if availability.lessons.count > 0 || session[:admin_id] %>
+                <%= link_to "Class details", availability_path(availability)%>
+            <% end %>
+            <% if session[:admin_id] %>
+                <%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
+            <% end %>
             <ol>
                 <% availability.lessons.each do |lesson|%>
                     <% if lesson.active %>

@@ -13,7 +13,9 @@
         <% if lesson.active %>
             <li>
                 <%= "#{lesson.availability.day} #{lesson.availability.start_time} to #{lesson.availability.end_time}" %>
-                <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>
+                <% if session[:admin_id] %>
+                    <%= content_tag(:button, "Edit Lesson", type:"button", onclick:"location.href = '/lessons/#{lesson.id}/edit';", class:"btn btn-info") %>
+                <% end %>
             </li>
             <ul>
                 <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
@@ -52,5 +54,3 @@
         <% end %>
     <% end %>
 </ul>
-
-<%= link_to("Logout", '/logout') %>
