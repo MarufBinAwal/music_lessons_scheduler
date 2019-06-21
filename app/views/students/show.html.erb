@@ -1,11 +1,30 @@
-<%= content_tag(:h1, @student.full_name) %>
-<%= content_tag(:p, "Date of Birth: #{@student.date_of_birth}")%>
-<%= content_tag(:p, "Phone Number: #{number_to_phone(@student.phone_number)}")%>
-<%= content_tag(:p, "Email: #{@student.email}")%>
-<%= content_tag(:p, "Notes: #{@student.misc_notes}")%>
-<%= content_tag(:p, "Billing Information: #{@student.billing_notes}")%>
-<%= link_to("Edit this student", edit_student_path(@student)) %><br>
-<%= link_to("Return to Index", students_path) %>
+<style>
+
+.main {
+    text-align: center;
+    background-color: #00000060;
+}
+
+
+</style>
+
+
+
+
+
+
+
+<div class="main">
+    <div class="student_info">
+        <%= content_tag(:h1, @student.full_name) %>
+        <%= content_tag(:p, "Date of Birth: #{@student.date_of_birth}")%>
+        <%= content_tag(:p, "Phone Number: #{number_to_phone(@student.phone_number)}")%>
+        <%= content_tag(:p, "Email: #{@student.email}")%>
+        <%= content_tag(:p, "Notes: #{@student.misc_notes}")%>
+        <%= content_tag(:p, "Billing Information: #{@student.billing_notes}")%>
+        <%= link_to("Edit this student", edit_student_path(@student)) %><br>
+        <%= link_to("Return to Index", students_path) %>
+    </div>
 
 <h3>Current Lessons</h3>
 <ul>
@@ -20,14 +39,17 @@
             <ul>
                 <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
                 <ul>
-                    <li>Phone number: <%= number_to_phone(lesson.availability.instructor.phone_number) %></li>
-                    <li>Email: <%= lesson.availability.instructor.email %></li>
+                    <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
+                    <ul>
+                        <li>Phone number: <%= number_to_phone(lesson.availability.instructor.phone_number) %></li>
+                        <li>Email: <%= lesson.availability.instructor.email %></li>
+                    </ul>
+                    <li>Instrument: <%= lesson.instrument %></li>
+                    <li>Price per month: $<%= lesson.price_of_lesson %></li>
+                    <li>Created by: <%= lesson.user %></li>
+                    <li>Lesson Notes: <%= lesson.misc_notes %></li>
                 </ul>
-                <li>Instrument: <%= lesson.instrument %></li>
-                <li>Price per month: $<%= lesson.price_of_lesson %></li>
-                <li>Created by: <%= lesson.user %></li>
-                <li>Lesson Notes: <%= lesson.misc_notes %></li>
-            </ul>
+            </div>
         <% end %>
     <% end %>
 </ul>
@@ -54,3 +76,5 @@
         <% end %>
     <% end %>
 </ul>
+</div>
+

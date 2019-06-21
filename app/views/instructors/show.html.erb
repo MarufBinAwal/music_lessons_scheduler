@@ -1,13 +1,27 @@
-<%= content_tag(:h1, @instructor.full_name) %>
-<%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
-<%= content_tag(:p, "Phone Number:"+(number_to_phone(@instructor.phone_number)) )%>
-<%= content_tag(:p, "Email: #{@instructor.email}")%>
-<%= content_tag(:p, "Instruments: #{@instructor.instruments}")%>
-<%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
-<%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
-<%= content_tag(:p, "Status: #{@status}") %>
-<%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
-<ul>
+<style>
+
+.main, .secondary {
+    text-align: center;
+    background-color: #00000060;
+}
+
+
+</style>
+
+
+
+<div class="main">
+        <%= content_tag(:h1, @instructor.full_name) %>
+        <%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
+        <%= content_tag(:p, "Phone Number:"+(number_to_phone(@instructor.phone_number)) )%>
+        <%= content_tag(:p, "Email: #{@instructor.email}")%>
+        <%= content_tag(:p, "Instruments: #{@instructor.instruments}")%>
+        <%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
+        <%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
+        <%= content_tag(:p, "Status: #{@status}") %>
+        <%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
+</div>
+<div class="secondary">
     <% @instructor.availabilities.each do |availability| %>
         <% if availability.active && availability.lessons.count != 0 %>
             <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
@@ -21,7 +35,6 @@
         <% end %>
     <% end %>
 </ul>
-<%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
-<%= link_to("Return to Index", instructors_path) %>
+</div>
 
 

@@ -2,6 +2,7 @@ class Instructor < ApplicationRecord
     has_many :availabilities, dependent: :destroy
     has_many :lessons, through: :availabilities, dependent: :destroy
     has_many :students, through: :lessons
+    validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
     has_secure_password
 
     validates :email, :presence => true, :uniqueness => { :case_sensitive => false }

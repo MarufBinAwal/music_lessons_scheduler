@@ -1,40 +1,55 @@
+<style>
+
+.main {
+    text-align: center;
+    background-color: #00000060;
+}
+
+
+</style>
+
+
 <%= content_tag(:h1, "#{@instructor.full_name} Schedule") %>
 <br>
 
-<% @availabilities.each do |availability| %>
+<div class="main">
 
-    <% if availability.active %>
+    <% @availabilities.each do |availability| %>
 
-        <li>
-            <% if availability.lessons.count > 0 || session[:admin_id] %>
-                <%= link_to "#{availability.day}: #{availability.start_time} to #{availability.end_time}", availability_path(availability)%>
-            <% else %>
-                <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
-            <% end %>
-            <% if session[:admin_id] %>
-                <br><%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
-            <% end %>
-            <ol>
-                <% availability.lessons.each do |lesson|%>
-                    <% if lesson.active %>
-                        <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
-                    <% end %>
+        <% if availability.active %>
+
+            <li>
+                <% if availability.lessons.count > 0 || session[:admin_id] %>
+                    <%= link_to "#{availability.day}: #{availability.start_time} to #{availability.end_time}", availability_path(availability)%>
+                <% else %>
+                    <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
                 <% end %>
-            </ol>
-        </li>
+                <% if session[:admin_id] %>
+                    <br><%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
+                <% end %>
+                <ul>
+                    <% availability.lessons.each do |lesson|%>
+                        <% if lesson.active %>
+                            <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
+                        <% end %>
+                    <% end %>
+                </ul>
+            </li>
 
-    <% elsif flash[:full_index] %>
+        <% elsif flash[:full_index] %>
 
-        <li>
-            <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
-            <%= link_to "Show Page", availability_path(availability)%>
-            INACTIVE
-        </li>
-        <br>
+            <li>
+                <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
+                <%= link_to "Show Page", availability_path(availability)%>
+                INACTIVE
+            </li>
+            <br>
+
+        <% end %>
 
     <% end %>
 
-<% end %>
+</div>
 
 <div class="bottom-bar">
 <% if flash[:full_index] %>
