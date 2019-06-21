@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
         else
             @errors = ""
         end
+        render layout: false
     end 
 
     
