@@ -1,6 +1,6 @@
 <h1>Admins</h1>
 <%= content_tag(:p, @error) %>
-<%= link_to "Create an admin", new_admin_path %>
+<%= content_tag(:a, "Create Admin", href:"/admins/new", class:"btn btn-info") %>
 <ul>
     <% @admins.each do |admin| %>
         <li>

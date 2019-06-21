@@ -13,7 +13,7 @@
 
 <div class="main">
 <h1>Students</h1>
-<%= link_to("Create new student", new_student_path) %>
+<%= content_tag(:a, "Create Student", href:"/students/new", class:"btn btn-info") %>
 
 <ul>
     <% @students.each do |student| %>
