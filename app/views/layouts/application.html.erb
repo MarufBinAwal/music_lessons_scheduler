@@ -31,7 +31,7 @@
     text-align: center;
     padding: 5px;
   }
-  ul {
+  ul{
     list-style-type: none;
   }
   .classtime {
@@ -49,13 +49,6 @@
     padding-left:0px;
     padding-bottom: 0px;
     flex-wrap: nowrap;
-  }
-  .nav-btns{
-    justify-content: flex-end;
-    flex-wrap: nowrap;
-  }
-  .nav-btn{
-    height: 100%;
   }
   .main-title{
     margin-bottom: 0px;
@@ -91,29 +84,47 @@
 
   <body>
 
-
     <div class="nav-bar">
 
-        <h4 class="main-title">
-        Flatiron Music Lessons:
-        <% if session[:student_id] %>
-              <%= Student.find(session[:student_id]).full_name%>
-        <% elsif session[:instructor_id] %>
-              <%= Instructor.find(session[:instructor_id]).full_name%>
+    <h4 class="main-title">
+    Flatiron Music Lessons:
+    <% if session[:student_id] %>
+            <%= Student.find(session[:student_id]).full_name%>
+    <% elsif session[:instructor_id] %>
+            <%= Instructor.find(session[:instructor_id]).full_name%>
+    <% elsif session[:admin_id] %>
+            <%= Admin.find(session[:admin_id]).full_name%>
+    <% end %>
+    </h4>
+
+    <div class="dropdown menu" aria-labelledby="dropdownMenuButton">
+        <% if session[:instructor_id] %>
+            <%= content_tag(:a, "Schedule", href:"/instructors/#{session[:instructor_id]}/availabilities", class:"btn btn-info") %>
+            <%= content_tag(:a, "Home", href:"/instructors/#{session[:instructor_id]}", class:"btn btn-info") %>
         <% elsif session[:admin_id] %>
-              <%= Admin.find(session[:admin_id]).full_name%>
+
         <% end %>
-        </h4>
-      
-
-      <div class="nav-btns">
-        
-        <%= content_tag(:button, "Logout", type:"button", onclick:"location.href = '/logout';", class:"btn-info nav-btn") %>
-        <%= content_tag(:button, "Logout", type:"button", onclick:"location.href = '/logout';", class:"btn-info nav-btn") %>
-      </div>
-
+          <%= content_tag(:a, "Logout", href:"/logout", class:"btn btn-info") %>
     </div>
 
+  </div>
+  <!-- <div class="dropdown">
+
+      <button class="btn btn-info dropdown-toggle">
+        Menu
+      </button>
+
+      <div class="dropdown menu" aria-labelledby="dropdownMenuButton">
+        <% if session[:instructor_id] %>
+            <%= content_tag(:a, "Schedule", href:"/instructors/#{session[:instructor_id]}/availabilities", class:"dropdown-item") %>
+            <%= content_tag(:a, "Home", href:"/instructors/#{session[:instructor_id]}", class:"dropdown-item") %>
+        <% elsif session[:admin_id] %>
+
+        <% end %>
+          <%= content_tag(:a, "Logout", href:"/logout", class:"dropdown-item") %>
+      </div>
+
+    </div> -->
 
     <%= yield %>
   
