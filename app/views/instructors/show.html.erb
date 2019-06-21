@@ -1,44 +1,15 @@
 <style>
 
-.container-show{
-    width:100%;
-    height: 100%
-}
-
 .main, .secondary {
     text-align: center;
-    background-color: grey;
-    displa
-    position: absolute;
-    margin: auto;
-
+    background-color: #00000060;
 }
-
-
 
 
 </style>
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="container-show">
 <div class="main">
         <%= content_tag(:h1, @instructor.full_name) %>
         <%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
@@ -64,9 +35,6 @@
         <% end %>
     <% end %>
 </ul>
-<%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
-<%= link_to("Return to Index", instructors_path) %>
-</div>
 </div>
 
 

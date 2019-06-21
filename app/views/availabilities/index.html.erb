@@ -1,42 +1,57 @@
-<%= content_tag(:h1, "#{@instructor.full_name} Schedule") %>
+<style>
 
-<br><%= link_to "Return to Instructor Page", instructor_path(@instructor)%>
-<br><br>
+.main {
+    text-align: center;
+    background-color: #00000060;
+}
 
-<% @availabilities.each do |availability| %>
 
-    <% if availability.active %>
+</style>
 
-        <li>
-            <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
-            <%= link_to "Show Page", availability_path(availability)%>
-            <%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
-            <ol>
-                <% availability.lessons.each do |lesson|%>
-                    <% if lesson.active %>
-                        <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
-                    <% end %>
-                <% end %>
-            </ol>
-        </li>
 
-    <% elsif flash[:full_index] %>
 
-        <li>
-            <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
-            <%= link_to "Show Page", availability_path(availability)%>
-            INACTIVE
-        </li>
-        <br>
+<div class="main">
+        <%= content_tag(:h1, "#{@instructor.full_name} Schedule") %>
 
-    <% end %>
+        <br><%= link_to "Return to Instructor Page", instructor_path(@instructor)%>
+        <br><br>
 
-<% end %>
+        <% @availabilities.each do |availability| %>
 
-<div class="bottom-bar">
-<% if flash[:full_index] %>
-    <%= content_tag(:button, "Show Active Availabilities", type:"button", onclick:"location.href = '/instructors/#{@instructor.id}/availabilities';", class:"btn btn-info change-list") %>
-<% else %>
-    <%= content_tag(:button, "Show All Availabilities", type:"button", onclick:"location.href = '/instructors/#{@instructor.id}/availabilities/all';", class:"btn btn-info change-list") %>
-<% end %>
+            <% if availability.active %>
+
+                <li>
+                    <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
+                    <%= link_to "Show Page", availability_path(availability)%>
+                    </br>
+                    <%= link_to "Deactivate Availability", "/availabilities/#{availability.id}/deactivate", data: { confirm: "Are you sure you want to deactivate this availability? All lessons associated with this availability will be archived." }%>
+                    <ul>
+                        <% availability.lessons.each do |lesson|%>
+                            <% if lesson.active %>
+                                <li><%= "#{lesson.student.full_name}-#{lesson.instrument}" %></li>
+                            <% end %>
+                        <% end %>
+                    </ul>
+                </li>
+
+            <% elsif flash[:full_index] %>
+
+                <li>
+                    <%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
+                    <%= link_to "Show Page", availability_path(availability)%>
+                    INACTIVE
+                </li>
+                <br>
+
+            <% end %>
+
+        <% end %>
+
+        <div class="bottom-bar">
+        <% if flash[:full_index] %>
+            <%= content_tag(:button, "Show Active Availabilities", type:"button", onclick:"location.href = '/instructors/#{@instructor.id}/availabilities';", class:"btn btn-info change-list") %>
+        <% else %>
+            <%= content_tag(:button, "Show All Availabilities", type:"button", onclick:"location.href = '/instructors/#{@instructor.id}/availabilities/all';", class:"btn btn-info change-list") %>
+        <% end %>
+        </div>
 </div>
