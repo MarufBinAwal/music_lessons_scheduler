@@ -27,17 +27,18 @@
             <%= content_tag(:button, instructor.full_name, type:"button", onclick:"location.href = '/instructors/#{instructor.id}';", class:"btn btn-info") %>
             <% instructor.availabilities.each do |availability| %>
                 <% if availability.lessons.count != 0 && availability.active %>
-                    <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
-                    <ul>
-                        <% availability.lessons.each do |lesson|%>
-                            <% if lesson.active %>
-                                <li>
-                                    <%= link_to lesson.student.full_name, student_path(lesson.student)%>
-                                    <%= "-#{lesson.instrument}" %>
-                                </li>
+                    <li class="classtime"><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%>
+                        <ul>
+                            <% availability.lessons.each do |lesson|%>
+                                <% if lesson.active %>
+                                    <li>
+                                        <%= link_to lesson.student.full_name, student_path(lesson.student)%>
+                                        <%= "-#{lesson.instrument}" %>
+                                    </li>
+                                <% end %>
                             <% end %>
-                        <% end %>
-                    </ul>
+                        </ul>
+                    </li>
                 <% end %>
             <% end %>
             </div>
