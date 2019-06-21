@@ -1,10 +1,5 @@
 <%= content_tag(:h1, "#{@instructor.full_name} Schedule") %>
 
-<% if flash[:full_index] %>
-    <%= link_to "Show Only Active Availabilities", "/instructors/#{@instructor.id}/availabilities" %>
-<% else %>
-    <%= link_to "Show All Availabilities", "/instructors/#{@instructor.id}/availabilities/all" %>
-<% end %>
 <br><%= link_to "Return to Instructor Page", instructor_path(@instructor)%>
 <br><br>
 
@@ -37,3 +32,11 @@
     <% end %>
 
 <% end %>
+
+<div class="bottom-bar">
+<% if flash[:full_index] %>
+    <%= content_tag(:button, "Show Active Availabilities", type:"button", onclick:"location.href = '/instructors/#{@instructor.id}/availabilities';", class:"btn btn-info change-list") %>
+<% else %>
+    <%= content_tag(:button, "Show All Availabilities", type:"button", onclick:"location.href = '/instructors/#{@instructor.id}/availabilities/all';", class:"btn btn-info change-list") %>
+<% end %>
+</div>
