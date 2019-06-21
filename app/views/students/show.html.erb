@@ -38,11 +38,8 @@ ul {
                     <%= content_tag(:button, "Edit Lesson", type:"button", onclick:"location.href = '/lessons/#{lesson.id}/edit';", class:"btn btn-info") %>
                 <% end %>
             </li>
-            <ul>
                 <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
-                <ul>
                     <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
-                    <ul>
                         <%= "#{lesson.availability.day} #{lesson.availability.start_time} to #{lesson.availability.end_time}" %>
                         <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>                   
                             <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
@@ -52,7 +49,6 @@ ul {
                             <li>Price per month: $<%= lesson.price_of_lesson %></li>
                             <li>Created by: <%= lesson.user %></li>
                             <li>Lesson Notes: <%= lesson.misc_notes %></li>
-                    </ul>
                 <% end %>
             <% end %>
     </div>
