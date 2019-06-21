@@ -7,8 +7,8 @@ class ApplicationController < ActionController::Base
         else
             @errors = ""
         end
-        render layout: false
         reset_session
+        render layout: false
     end 
 
     
