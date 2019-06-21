@@ -1,5 +1,3 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
 <style>
 
 .main {
@@ -13,21 +11,6 @@
 .third {
     text-align: center;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 </style>
@@ -76,8 +59,8 @@
             </ul>
         <% end %>
     <% end %>
-</div>
-<div class="third">
-    <%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
-    <%= link_to("Return to Index", instructors_path) %>
-</div>
+</ul>
+<%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
+<%= link_to("Return to Index", instructors_path) %>
+
+

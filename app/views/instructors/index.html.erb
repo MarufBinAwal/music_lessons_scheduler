@@ -1,10 +1,5 @@
 <h1>Instructors</h1>
 <%= link_to("Create new instructor", new_instructor_path) %><br>
-<% if flash[:full_index] %>
-    <%= link_to("Only Active Instructors", '/instructors') %>
-<% else %>
-    <%= link_to("All Instructors", '/instructors/all') %>
-<% end %>
 
 <ul>
     <% @instructors.each do |instructor| %>
@@ -20,4 +15,10 @@
     <% end %>
 </ul>
 
-<%= link_to("Logout", '/logout') %>
+<div class="bottom-bar">
+<% if flash[:full_index] %>
+    <%= content_tag(:button, "Show Active Instructors", type:"button", onclick:"location.href = '/instructors';", class:"btn btn-info change-list") %>
+<% else %>
+    <%= content_tag(:button, "Show All Instructors", type:"button", onclick:"location.href = '/instructors/all';", class:"btn btn-info change-list") %>
+<% end %>
+</div>

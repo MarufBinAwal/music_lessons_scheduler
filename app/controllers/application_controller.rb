@@ -1,17 +1,13 @@
 class ApplicationController < ActionController::Base
     before_action :anyone_logged_in, except: [:login_form, :authenticate]
 
-
-   
-
-
    def login_form
-    if (flash[:alert])
-        @errors = flash[:alert]
-    else
-        @errors = ""
-    end
-    reset_session
+        if (flash[:alert])
+            @errors = flash[:alert]
+        else
+            @errors = ""
+        end
+        reset_session
     end 
 
     

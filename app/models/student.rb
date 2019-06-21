@@ -5,6 +5,8 @@ class Student < ApplicationRecord
     validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
     has_secure_password
 
+    validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
+
     def full_name
         "#{self.first_name} #{self.last_name}"
     end

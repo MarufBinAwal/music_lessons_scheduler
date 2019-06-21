@@ -4,6 +4,8 @@ class Instructor < ApplicationRecord
     has_many :students, through: :lessons
     validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
     has_secure_password
+
+    validates :email, :presence => true, :uniqueness => { :case_sensitive => false }
     
     def full_name
         "#{self.first_name} #{self.last_name}"
