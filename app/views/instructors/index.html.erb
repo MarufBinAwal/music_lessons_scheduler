@@ -1,3 +1,16 @@
+<style>
+.main {
+    text-align: center;
+    background-color: #00000060;
+}
+
+
+</style>
+
+
+
+
+<div class="main">
 <h1>Instructors</h1>
 <%= link_to("Create new instructor", new_instructor_path) %><br>
 
@@ -21,4 +34,5 @@
 <% else %>
     <%= content_tag(:button, "Show All Instructors", type:"button", onclick:"location.href = '/instructors/all';", class:"btn btn-info change-list") %>
 <% end %>
+</div>
 </div>

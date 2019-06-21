@@ -4,7 +4,9 @@
     text-align: center;
     background-color: #00000060;
 }
-
+ul {
+    margin-left:0px;
+}
 
 </style>
 
@@ -26,30 +28,24 @@
         <%= link_to("Return to Index", students_path) %>
     </div>
 
-<h3>Current Lessons</h3>
-<div class="archive_title">
-    <ul>
-        <% @student.lessons.each do |lesson| %>
-            <% if lesson.active %>
-                <li>
-                    <%= "#{lesson.availability.day} #{lesson.availability.start_time} to #{lesson.availability.end_time}" %>
-                    <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>
-                </li>
-                <ul>
-                    <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
+    <h3>Current Lessons</h3>
+    <div class="archive_title">
+            <% @student.lessons.each do |lesson| %>
+                <% if lesson.active %>
                     <ul>
-                        <li>Phone number: <%= number_to_phone(lesson.availability.instructor.phone_number) %></li>
-                        <li>Email: <%= lesson.availability.instructor.email %></li>
+                        <%= "#{lesson.availability.day} #{lesson.availability.start_time} to #{lesson.availability.end_time}" %>
+                        <%= link_to "Edit Lesson", edit_lesson_path(lesson) %>                   
+                            <li>Instructor: <%= lesson.availability.instructor.full_name %></li>
+                                <li>Phone number: <%= number_to_phone(lesson.availability.instructor.phone_number) %></li>
+                                <li>Email: <%= lesson.availability.instructor.email %></li>
+                            <li>Instrument: <%= lesson.instrument %></li>
+                            <li>Price per month: $<%= lesson.price_of_lesson %></li>
+                            <li>Created by: <%= lesson.user %></li>
+                            <li>Lesson Notes: <%= lesson.misc_notes %></li>
                     </ul>
-                    <li>Instrument: <%= lesson.instrument %></li>
-                    <li>Price per month: $<%= lesson.price_of_lesson %></li>
-                    <li>Created by: <%= lesson.user %></li>
-                    <li>Lesson Notes: <%= lesson.misc_notes %></li>
-                </ul>
-            </div>
-        <% end %>
-    <% end %>
-</ul>
+                <% end %>
+            <% end %>
+    </div>
 <br>
 <h3>Archived Lessons</h3>
 <ul>
