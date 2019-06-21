@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
 
 
    def login_form
-        reset_session
-        if (flash[:alert])
-            @errors = flash[:alert]
-        else
-            @errors = ""
-        end
+    if (flash[:alert])
+        @errors = flash[:alert]
+    else
+        @errors = ""
+    end
+    reset_session
     end 
 
     

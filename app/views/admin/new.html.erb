@@ -1,0 +1,17 @@
+<h2>New Admin</h2>
+<%= form_with model: Admin.new do | f | %>
+    <div>
+        <%= f.label :name %>
+        <%= f.text_field :name, required: true %>
+    </div>
+
+    <div>
+        <%= f.label :email %>
+        <%= f.email_field :email, required: true %>
+    </div>
+
+    <div>
+        <%= f.label :password %>
+        <%= f.text_field :password %>
+    </div>
+<% end %>

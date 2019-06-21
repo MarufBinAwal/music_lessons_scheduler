@@ -1,13 +1,69 @@
-<%= content_tag(:h1, @instructor.full_name) %>
-<%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
-<%= content_tag(:p, "Phone Number:"+(number_to_phone(@instructor.phone_number)) )%>
-<%= content_tag(:p, "Email: #{@instructor.email}")%>
-<%= content_tag(:p, "Instruments: #{@instructor.instruments}")%>
-<%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
-<%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
-<%= content_tag(:p, "Status: #{@status}") %>
-<%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
-<ul>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<style>
+
+.main {
+    text-align: center;
+}
+
+.secondary {
+    text-align: center;
+}
+
+.third {
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="main">
+        <%= content_tag(:h1, @instructor.full_name) %>
+        <%= content_tag(:p, "Date of Birth: #{@instructor.date_of_birth}")%>
+        <%= content_tag(:p, "Phone Number:"+(number_to_phone(@instructor.phone_number)) )%>
+        <%= content_tag(:p, "Email: #{@instructor.email}")%>
+        <%= content_tag(:p, "Instruments: #{@instructor.instruments}")%>
+        <%= content_tag(:p, "Payrate: #{@instructor.pay_rate}")%>
+        <%= content_tag(:p, "Notes: #{@instructor.misc_notes}") %>
+        <%= content_tag(:p, "Status: #{@status}") %>
+        <%= link_to("Schedule", "/instructors/#{@instructor.id}/availabilities") %>
+</div>
+<div class="secondary">
     <% @instructor.availabilities.each do |availability| %>
         <% if availability.active && availability.lessons.count != 0 %>
             <li><%= "#{availability.day}: #{availability.start_time} to #{availability.end_time}"%></li>
@@ -20,9 +76,8 @@
             </ul>
         <% end %>
     <% end %>
-</ul>
-<%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
-<%= link_to("Return to Index", instructors_path) %>
-<%= link_to("Logout", '/logout') %>
-
-
+</div>
+<div class="third">
+    <%= link_to("Edit this instructor", edit_instructor_path(@instructor)) %><br>
+    <%= link_to("Return to Index", instructors_path) %>
+</div>
